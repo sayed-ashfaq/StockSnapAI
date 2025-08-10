@@ -2,7 +2,7 @@ import yaml
 from pathlib import Path
 
 
-def load_config(config_path: str = "C:\\Users\\302sy\\Desktop\\Generative AI\\StockSnapAI\\utils\\config_loader.py") -> dict:
+def load_config(config_path: str = "C:\\Users\\302sy\\Desktop\\Generative AI\\StockSnapAI\\config\\config.yaml") -> dict:
     with open(Path(config_path), "r") as file:
         config=yaml.safe_load(file)
     return config

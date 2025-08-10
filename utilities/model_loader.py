@@ -3,7 +3,7 @@ import sys
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from openai.types import embedding_model
-from utils.config_loader import load_config
+from utilities.config_loader import load_config
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
@@ -69,7 +69,6 @@ class ModelLoader:
         elif provider == "openai":
             llm= ChatOpenAI(
                 model= model_name,
-                temperature= temperature,
                 api_key= self.api_key["OPENAI_API_KEY"],
             )
             return llm
@@ -90,9 +89,9 @@ if __name__ == "__main__":
     print(f" Embedding Result{result}")
 
     # Test the LLm loading based on YAML config
-    llm= loader.load_llm()
+    llm= loader.load_llm("openai")
     print(f"LMM model loaded: {llm}")
 
     # test the model loader
-    result= llm.invoke("Hello World")
+    result= llm.invoke("Hi, who made you")
     print(f" LLM Result{result.content}")
