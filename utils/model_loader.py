@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     # test the model loader
     result = embedding_model.embed_query("Hello World")
-    print(f" Embedding Result{result}")
+    print(" Embedding Result{result}")
 
     # Test the LLm loading based on YAML config
     llm= loader.load_llm("openai")
@@ -94,4 +94,4 @@ if __name__ == "__main__":
 
     # test the model loader
     result= llm.invoke("Hi, who made you")
-    print(f" LLM Result{result.content}")
+    print(f" LLM Result\n{result.content}")
