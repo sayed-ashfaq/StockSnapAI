@@ -2,13 +2,11 @@ import os
 import sys
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from openai.types import embedding_model
+# from openai.types import embedding_model
 from utils.config_loader import load_config
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
-from langchain_openai import ChatOpenAI
-
 
 class ModelLoader:
     """
@@ -17,7 +15,7 @@ class ModelLoader:
     def __init__(self):
         load_dotenv()
         self._validate_env()
-        self.config = load_config(config_path="..\\config\\config.yaml")
+        self.config = load_config(config_path="C:\\Users\\302sy\\Desktop\\Generative AI\\StockSnapAI\\config\\config.yaml")
     def _validate_env(self):
         """
         Validate the environment variables.

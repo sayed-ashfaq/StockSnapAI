@@ -6,5 +6,4 @@ langchain-groq
 langchain-community
 charset-normalizer
 chardet
-newspaper
--e .
+faiss-cpu
