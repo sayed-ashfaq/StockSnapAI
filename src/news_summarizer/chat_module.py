@@ -24,8 +24,8 @@ class ConversationalRAG:
         self.retriever = retriever
         self.llm = self._load_llm()
         try:
-            self.contextualize_prompt = qa_context_history_prompt
-            self.qa_prompt= qa_history_prompt
+            self.contextualize_prompt = qa_history_prompt
+            self.qa_prompt= qa_context_history_prompt
 
             self._build_lcel_chain()
             self.log.info("Conversational RAG initialized", session_id= self.session_id)
@@ -53,7 +53,7 @@ class ConversationalRAG:
                """
         try:
             chat_history = chat_history or []
-            payload = {"input": user_input, "documents": self.retriever,"chat_history": chat_history or []}
+            payload = {"input": user_input, "chat_history": chat_history or []}
             answer = self.chain.invoke(payload)
             if not answer:
                 self.log.warning("No answer has been generated", session_id=self.session_id)

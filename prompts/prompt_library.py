@@ -52,6 +52,7 @@ qa_context_history_prompt = ChatPromptTemplate.from_messages([
         Context:
         """
     ),
+    ('system', "{documents}"),
     MessagesPlaceholder("chat_history"),
     ("human", "{input}")
 ])
