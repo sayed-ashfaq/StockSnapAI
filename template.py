@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
-import logging
+import logger
 
-logging.basicConfig(level= logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger.basicConfig(level= logger.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 
 projectname= "StockSnapAI"
 

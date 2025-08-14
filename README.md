@@ -74,3 +74,8 @@ project_root/
 └── README.md                       # Project documentation
 
 ```
+
+# TODO:
+1. Scrape the news content and store it in .txt file
+2. ingest the text data into the vector database(Chroma/FAISS)
+3. 

@@ -6,4 +6,5 @@ langchain-groq
 langchain-community
 charset-normalizer
 chardet
+structlog
 faiss-cpu

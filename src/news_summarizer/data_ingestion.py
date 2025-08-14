@@ -1,98 +1,136 @@
-import os
-import requests
-from bs4 import BeautifulSoup
-from typing import List
-from dotenv import load_dotenv
-
-from langchain_community.vectorstores import FAISS
+import uuid
+from pathlib import Path
+import sys
+from datetime import datetime
+from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader, TextLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_community.vectorstores import FAISS
+from log_utils.custom_logging import CustomLogger
+from exception.custom_exeption import CustomException
 from utils.model_loader import ModelLoader
-load_dotenv()
 
-
-class StockNewsFAISS:
-    """
-    Fetches news articles for a company, scrapes paragraphs,
-    and stores them in a FAISS index for retrieval.
-    """
-
-    def __init__(self, api_key=None, faiss_dir="faiss_news_index"):
-        self.api_key = api_key or os.getenv("NEWS_API_KEY")
-        self.faiss_dir = faiss_dir
-        if not self.api_key:
-            raise ValueError("NEWS_API_KEY is required in .env or as parameter.")
-        os.makedirs(self.faiss_dir, exist_ok=True)
-
-    def fetch_news_list(self, company_name: str, limit: int = 3) -> List[dict]:
-        """
-        Fetch top N news articles from NewsAPI.
-        """
-        endpoint = "https://newsapi.org/v2/top-headlines"
-        params = {
-            "apiKey": self.api_key,
-            "q": company_name,
-            "sortBy": "popularity",
-            "pageSize": limit,
-        }
+class NewsIngestor:
+    def __init__(self, temp_dir: str = "data/new_ingestor", faiss_dir: str= "faiss_index"):
         try:
-            response = requests.get(endpoint, params=params)
-            response.raise_for_status()
-            articles = response.json().get("articles", [])
-            return [{"title": a["title"], "url": a["url"]} for a in articles]
-        except Exception as e:
-            print(f"[ERROR] Fetching news failed: {e}")
-            return []
+            self.log = CustomLogger().get_logger(__name__)
 
-    def fetch_article_paragraphs(self, url: str) -> List[str]:
-        """
-        Fetch an article URL and return a list of paragraph texts.
-        """
+            # base dirs
+            self.temp_dir = Path(temp_dir)
+            self.faiss_dir = Path(faiss_dir)
+            self.temp_dir.mkdir(parents=True, exist_ok=True)
+            self.faiss_dir.mkdir(parents=True, exist_ok=True)
+
+            # # sessionzed_path (Future)
+            # self.session_id = session_id or f"session_{datetime.now().strftime('%Y%m%d%H%M%S')}_{uuid.uuid4().hex[:8]}"
+            # self.session_temp_dir = self.temp_dir / self.session_id
+            # self.session_faiss_dir = self.faiss_dir / self.session_id
+            # self.session_temp_dir.mkdir(parents=True, exist_ok=True)
+            # self.session_faiss_dir.mkdir(parents=True, exist_ok=True)
+
+            self.model_loader = ModelLoader()
+
+            self.log.info(
+                "Document Ingestion initiated",
+                temp_base= str(self.temp_dir),
+                faiss_dir= str(self.faiss_dir),
+                # Add sessions
+            )
+        except Exception as e:
+            self.log.error("Failed to initialize NewsIngestor", error=str(e))
+            raise CustomException("Failed to initialize NewsIngestor", sys)
+
+    # def ingest_files(self, text_files):
+    #     try:
+    #         text_data= []
+    #
+    #         for file in text_files:
+    #             # ext = Path(file).suffix.lower()
+    #             # if ext != ".txt":
+    #             #     self.log.warning("Unsupported file extension", filename= file.name)
+    #
+    #             unique_para_name= f"{uuid.uuid4().hex[:8]}.txt"
+    #             temp_path = self.temp_dir/unique_para_name
+    #
+    #             with open(temp_path, "wb") as f:
+    #                 f.write(file)
+    #             self.log.info("File saved for ingestion", filename= file.name, saved_as= str(temp_path))
+    #
+    #             loader= TextLoader(str(temp_path), encoding="utf-8")
+    #             docs= loader.load()
+    #             text_data.append(docs)
+    #         if not text_data:
+    #             raise CustomException("No file data found", sys)
+    #
+    #         self.log.info(f"Paragraph has been loaded" )
+    #         return self._create_retriever(text_data)
+    #
+    #     except Exception as e:
+    #         self.log.error("Failed to ingest files to vector-database", error=str(e))
+
+    def ingest_files(self, text_files):
         try:
-            response = requests.get(url)
-            response.raise_for_status()
-            soup = BeautifulSoup(response.text, "html.parser")
-            return [p.get_text(strip=True) for p in soup.find_all("p") if p.get_text(strip=True)]
+            text_data = []
+
+            for file_path in text_files:
+                unique_para_name = f"{uuid.uuid4().hex[:8]}.txt"
+                temp_path = self.temp_dir / unique_para_name
+
+                with open(file_path, "rb") as source_file:
+                    content = source_file.read()
+
+                with open(temp_path, "wb") as f:
+                    f.write(content)
+
+                self.log.info(
+                    "File saved for ingestion",
+                    filename=file_path,
+                    saved_as=str(temp_path)
+                )
+
+                loader = TextLoader(str(temp_path), encoding="utf-8")
+                docs = loader.load()
+                text_data.extend(docs)
+
+            if not text_data:
+                raise CustomException("No file data found", sys)
+
+            self.log.info("Paragraph has been loaded")
+            return self._create_retriever(text_data)
+
         except Exception as e:
-            print(f"[ERROR] Fetching article content failed for {url}: {e}")
-            return []
+            self.log.error("Failed to ingest files to vector-database", error=str(e))
 
-    def store_in_faiss(self, paragraphs: List[str]):
-        """
-        Store the paragraphs in a FAISS index.
-        """
-        # Split into chunks
-        splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-        texts = splitter.create_documents(paragraphs)
+    def _create_retriever(self, documents):
+        try:
+            splitter= RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
 
-        # Create embeddings
-        embeddings = ModelLoader().load_embedding_model()
+            chunks= splitter.split_documents(documents)
 
-        # Create FAISS index
-        vectorstore = FAISS.from_documents(texts, embeddings)
+            self.log.info(f"Documents split into chunks", total_chunks= len(chunks),)
 
-        # Save FAISS index
-        vectorstore.save_local(self.faiss_dir)
-        print(f"[INFO] FAISS index saved to {self.faiss_dir}")
+            embeddings= self.model_loader.load_embedding_model()
 
-    def run(self, company_name: str, limit: int = 3):
-        """
-        Full pipeline: fetch news → scrape paragraphs → store in FAISS.
-        """
-        news_list = self.fetch_news_list(company_name, limit)
-        all_paragraphs = []
+            vector_store= FAISS.from_documents(chunks, embeddings)
 
-        for article in news_list:
-            paras = self.fetch_article_paragraphs(article["url"])
-            all_paragraphs.extend(paras)
+            vector_store.save_local(str(self.faiss_dir))
+            self.log.info("FAISS index saved to disk", path= str(self.faiss_dir))
 
-        if not all_paragraphs:
-            print("[WARN] No paragraphs found. Nothing to store.")
-            return
+            retriever= vector_store.as_retriever(search_type= "similarity", search_kwargs= {"k": 5})
+            self.log.info("Retriever has been created and ready to use")
 
-        self.store_in_faiss(all_paragraphs)
-        print(f"[INFO] Stored {len(all_paragraphs)} paragraphs in FAISS index.")
+            return retriever
+        except Exception as e:
+            self.log.error("Failed to create retriever", error=str(e))
+            raise CustomException("Failed to create retriever", sys)
 
+## Testing retriever
 
 if __name__ == "__main__":
-    fetcher = StockNewsFAISS()
-    fetcher.run(company_name="Tesla", limit=3)
+    docs= [
+        "C:\\Users\\302sy\\Desktop\\Generative AI\\StockSnapAI\\data\\AI-Driven Market Rally August 2025.txt",
+        "C:\\Users\\302sy\\Desktop\\Generative AI\\StockSnapAI\\data\\Stock Market Overview August 2025.txt",
+        "C:\\Users\\302sy\\Desktop\\Generative AI\\StockSnapAI\\data\\Tariff Impacts on Markets August 20.txt"
+    ]
+    retriever= NewsIngestor().ingest_files(docs)
+    answer= retriever.invoke("What about ai")
+    print("Response: ", answer)
