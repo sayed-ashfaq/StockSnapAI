@@ -14,8 +14,19 @@ document_summarize_prompt = ChatPromptTemplate.from_template(
     {document_text}
     """
 )
+#  CONTEXTUALIZE QUESTION PROMPT
+contextualize_prompt = ChatPromptTemplate.from_messages([
+    ("system", """
+        You are a helpful assistant specialized in reformulating follow-up questions 
+        about stock market news into standalone questions. 
+        Use only the provided conversation history to infer missing details.
+        Do not answer the question here; only rephrase it.
+    """),
+    MessagesPlaceholder("chat_history"),
+    ("human", "{input}")
+])
 
-## PROMPT FOR QA_CONTEXT_CONVERSATION
+# PROMPT FOR QA_CONTEXT_CONVERSATION
 
 qa_context_prompt = ChatPromptTemplate.from_messages([
     (
@@ -37,6 +48,9 @@ qa_context_prompt = ChatPromptTemplate.from_messages([
         You are provided with:
         - Conversation history
         - Retrieved context from relevant news articles
+        
+        Context:
+        \n{documents}
         """
     ),
     MessagesPlaceholder("chat_history"),
@@ -46,6 +60,7 @@ qa_context_prompt = ChatPromptTemplate.from_messages([
 ## CENTRAL DICTIONARY TO REGISTER PROMPTS
 
 PROMPT_REGISTRY = {
-    "news_summarizer": document_summarize_prompt,
+    "news_summarizer_prompt": document_summarize_prompt,
+    "contextualize_qa_prompt ": contextualize_prompt,
     "context_history_qa_prompt": qa_context_prompt,
 }

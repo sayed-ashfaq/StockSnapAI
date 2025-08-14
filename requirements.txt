@@ -8,3 +8,4 @@ charset-normalizer
 chardet
 structlog
 faiss-cpu
+streamlit
