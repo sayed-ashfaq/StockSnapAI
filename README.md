@@ -78,4 +78,4 @@ project_root/
 # TODO:
 1. Scrape the news content and store it in .txt file
 2. ingest the text data into the vector database(Chroma/FAISS)
-3. 
+3. Model is not storing conversation history, find a way
