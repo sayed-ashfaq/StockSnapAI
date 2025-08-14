@@ -17,6 +17,17 @@ from prompts.prompt_library import document_summarize_prompt,qa_history_prompt,q
 from exception.custom_exeption import CustomException
 from log_utils.custom_logging import CustomLogger
 
+# In-memory history store
+_HISTORY_STORE = {}
+
+def get_session_history(session_id: str) -> BaseChatMessageHistory:
+    """Retrieve or create a chat history for a session."""
+    if session_id not in _HISTORY_STORE:
+        _HISTORY_STORE[session_id] = ChatMessageHistory()
+    return _HISTORY_STORE[session_id]
+
+
+
 class ConversationalRAG:
     def __init__(self, session_id: str, retriever):
         self.log = CustomLogger().get_logger(__name__)
@@ -44,17 +55,18 @@ class ConversationalRAG:
             self.log.error("error loading llm", error=str(e))
             raise CustomException("Error loading llm", sys)
 
-    def invoke(self, user_input: str, chat_history: Optional[List[BaseMessage]]= None)->str:
+    def invoke(self, user_input: str)->str:
         """
                package of chain
                :param user_input:
-               :param chat_history:
                :return:
                """
         try:
-            chat_history = chat_history or []
-            payload = {"input": user_input, "chat_history": chat_history or []}
-            answer = self.chain.invoke(payload)
+
+            answer = self.chain.invoke(
+                           {"input": user_input},
+                           config={"configurable": {"session_id": self.session_id}}
+                       )
             if not answer:
                 self.log.warning("No answer has been generated", session_id=self.session_id)
                 return "No answer generated"
@@ -64,19 +76,7 @@ class ConversationalRAG:
                           user_input=user_input,
                           answer_preview=answer[:100])
             return answer
-    #     try:
-    #         response= self.chain.invoke(
-    #             {"input": user_input},
-    #             config= {"configurable": {"session_id": self.session_id}}
-    #         )
-    #         answer= response.get("answer", "No answer")
-    #
-    #
-    #         if not answer:
-    #             self.log.warning("Empty answer received")
-    #
-    #         self.log.info("Chain invoked successfully", user_input= user_input, answer= answer[:10])
-    #         return answer
+
         except Exception as e:
             self.log.error("Failed to invoke conversational RAG", error=str(e))
             raise CustomException("Failed to invoke conversational RAG", sys)
@@ -112,7 +112,7 @@ class ConversationalRAG:
 
             retrieved_docs= question_rewriter | self.retriever | self._format_docs
 
-            self.chain= (
+            rag_chain= (
                 {
                     "documents": retrieved_docs,
                     "input": itemgetter("input"),
@@ -121,6 +121,14 @@ class ConversationalRAG:
                 | self.qa_prompt
                 | self.llm
                 | StrOutputParser()
+            )
+
+            self.chain= RunnableWithMessageHistory(
+                rag_chain,
+                get_session_history,
+                input_messages_key="input",
+                history_messages_key="chat_history",
+                output_messages_key="answer",
             )
 
             self.log.info("Chain has been built successfully", session_id= self.session_id)
