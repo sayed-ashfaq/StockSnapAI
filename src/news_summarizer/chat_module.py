@@ -14,19 +14,8 @@ from langchain.chains import create_history_aware_retriever, create_retrieval_ch
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from utils.model_loader import ModelLoader
 from prompts.prompt_library import document_summarize_prompt,qa_history_prompt,qa_context_history_prompt
-from exception.custom_exeption import CustomException
+from exception.custom_exeption_archive import CustomException
 from log_utils.custom_logging import CustomLogger
-
-# In-memory history store
-_HISTORY_STORE = {}
-
-def get_session_history(session_id: str) -> BaseChatMessageHistory:
-    """Retrieve or create a chat history for a session."""
-    if session_id not in _HISTORY_STORE:
-        _HISTORY_STORE[session_id] = ChatMessageHistory()
-    return _HISTORY_STORE[session_id]
-
-
 
 class ConversationalRAG:
     def __init__(self, session_id: str, retriever):
@@ -80,23 +69,23 @@ class ConversationalRAG:
         except Exception as e:
             self.log.error("Failed to invoke conversational RAG", error=str(e))
             raise CustomException("Failed to invoke conversational RAG", sys)
-    #
-    #
-    # def _get_session_history(self, session_id) -> BaseChatMessageHistory:
-    #     try:
-    #         if "chat_history" not in st.session_state:
-    #             st.session_state.chat_history= {}
-    #
-    #
-    #         if session_id not in st.session_state.chat_history:
-    #             st.session_state.chat_history[session_id]= ChatMessageHistory()
-    #             self.log.info("New Chat session history created", session_id= session_id)
-    #
-    #         return st.session_state.chat_history[session_id]
-    #
-    #     except Exception as e:
-    #         self.log.error("Failed to access session history", error=str(e))
-    #         raise CustomException("Failed to access session history", sys)
+
+
+    def _get_session_history(self, session_id) -> BaseChatMessageHistory:
+        try:
+            if "chat_history" not in st.session_state:
+                st.session_state.chat_history= {}
+
+
+            if session_id not in st.session_state.chat_history:
+                st.session_state.chat_history[session_id]= ChatMessageHistory()
+                self.log.info("New Chat session history created", session_id= session_id)
+
+            return st.session_state.chat_history[session_id]
+
+        except Exception as e:
+            self.log.error("Failed to access session history", error=str(e))
+            raise CustomException("Failed to access session history", sys)
 
     def _format_docs(self, docs):
         return "\n\n".join(d.page_content for d in docs)
@@ -125,7 +114,7 @@ class ConversationalRAG:
 
             self.chain= RunnableWithMessageHistory(
                 rag_chain,
-                get_session_history,
+                get_session_history=self._get_session_history,
                 input_messages_key="input",
                 history_messages_key="chat_history",
                 output_messages_key="answer",

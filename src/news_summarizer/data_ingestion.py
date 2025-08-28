@@ -6,7 +6,7 @@ from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader, Te
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from log_utils.custom_logging import CustomLogger
-from exception.custom_exeption import CustomException
+from exception.custom_exeption_archive import CustomException
 from utils.model_loader import ModelLoader
 
 class NewsIngestor:
@@ -99,6 +99,7 @@ class NewsIngestor:
 
         except Exception as e:
             self.log.error("Failed to ingest files to vector-database", error=str(e))
+            raise CustomException("Failed to ingest files to vector-database", sys)
 
     def _create_retriever(self, documents):
         try:
