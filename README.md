@@ -29,24 +29,28 @@ AI Finance Copilot is a **Streamlit-based prototype** that assists traders and a
 * Export chat history
 
 ---
+## 📊 Dashboard
+
+#### Link: https://stocksnapai.streamlit.app/
 
 ## 🖼️ Screenshots
 
 ### Home & API Configuration
 
-![App Screenshot](screenshots/home.png)
+<img width="300" height="289" alt="Screenshot 2025-09-01 122910" src="https://github.com/user-attachments/assets/0be481f8-9bfb-41ce-82c8-46e0853f51ca" />
 
 ### Stock News & Portfolio Analysis
 
-![Stock Sentiment](screenshots/portfolio.png)
+<img width="413" height="500" alt="StockSnapAI-1" src="https://github.com/user-attachments/assets/a9caefda-6a56-43ff-8667-50a012ae1e26" />
 
 ### Document Upload & Summaries
 
-![Document Analysis](screenshots/documents.png)
+<img width="413" height="500" alt="StockSnapAI-2" src="https://github.com/user-attachments/assets/07943934-3755-4db3-b8b3-400279f31c31" />
 
 ### Interactive Document Q\&A
 
-![Chat with Docs](screenshots/chat.png)
+<img width="413" height="409" alt="StocksnapAI-3" src="https://github.com/user-attachments/assets/aba73a30-f0a4-4f41-adff-00320154b881" />
+
 
 ---
 
@@ -125,7 +129,9 @@ Planned features for the full-scale application:
 * Real-time alerts & monitoring
 * Multi-user support with authentication
 * Enhanced security for sensitive documents
-* Mobile & web-native apps
+* Web based app
+* Exception handing and custom logging
+* Advanced vectorstore chunking, retriving methods
 
 ---
 
