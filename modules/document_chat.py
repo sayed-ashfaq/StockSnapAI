@@ -17,8 +17,13 @@ load_dotenv()
 
 class DocumentChat:
     def __init__(self):
-        self.embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
-        self.llm = init_chat_model(model='gemini-2.0-flash', model_provider="google_genai")
+        try:
+            self.embeddings = OpenAIEmbeddings(model="text-embedding-3-large")
+            self.llm = init_chat_model(model='gemini-2.0-flash', model_provider="google_genai")
+            self.initialized = True
+        except Exception as e:
+            self.initialized = False
+            self.error_message = str(e)
 
         # Initialize session state
         if 'vector_store' not in st.session_state:
@@ -83,19 +88,19 @@ class DocumentChat:
             content = "\n\n".join([doc.page_content for doc in docs[:3]])  # First 3 chunks
 
             summary_prompt = f"""
-             Please provide a comprehensive summary of this financial document. Include:
+            Please provide a comprehensive summary of this financial document. Include:
 
-             1. **Document Type & Overview**: What type of document is this? (earnings report, annual report, audit report, etc.)
-             2. **Key Financial Highlights**: Important financial metrics, performance indicators
-             3. **Red Flags & Concerns**: Any potential risks, warnings, or concerning trends
-             4. **Management Discussion**: Key points from management commentary
-             5. **Future Outlook**: Forward-looking statements or guidance
+            1. **Document Type & Overview**: What type of document is this? (earnings report, annual report, audit report, etc.)
+            2. **Key Financial Highlights**: Important financial metrics, performance indicators
+            3. **Red Flags & Concerns**: Any potential risks, warnings, or concerning trends
+            4. **Management Discussion**: Key points from management commentary
+            5. **Future Outlook**: Forward-looking statements or guidance
 
-             Document Content:
-             {content[:3000]}...
+            Document Content:
+            {content[:3000]}...
 
-             Please structure your response clearly with the above sections.
-             """
+            Please structure your response clearly with the above sections.
+            """
 
             response = self.llm.invoke([HumanMessage(content=summary_prompt)])
             st.session_state.document_summary = response.content
@@ -120,22 +125,22 @@ class DocumentChat:
             except:
                 # Fallback prompt if hub is not available
                 formatted_prompt = f"""
-                 You are an AI assistant helping analyze financial documents. Use the following context to answer the user's question.
+                You are an AI assistant helping analyze financial documents. Use the following context to answer the user's question.
 
-                 Context:
-                 {docs_content}
+                Context:
+                {docs_content}
 
-                 Question: {question}
+                Question: {question}
 
-                 Instructions:
-                 - Answer based on the provided context
-                 - If you cannot find relevant information, say so
-                 - Provide specific citations when possible
-                 - Focus on factual information from the document
-                 - Highlight any red flags or important insights
+                Instructions:
+                - Answer based on the provided context
+                - If you cannot find relevant information, say so
+                - Provide specific citations when possible
+                - Focus on factual information from the document
+                - Highlight any red flags or important insights
 
-                 Answer:
-                 """
+                Answer:
+                """
 
             # Generate response
             response = self.llm.invoke([HumanMessage(content=str(formatted_prompt))])
@@ -149,6 +154,12 @@ class DocumentChat:
             return f"Error processing question: {str(e)}"
 
     def render(self):
+        # Check if properly initialized
+        if not self.initialized:
+            st.error(f"❌ Document Chat initialization failed: {self.error_message}")
+            st.info("Please check your API keys in the sidebar.")
+            return
+
         st.header("📄 Document Chat & Analysis")
         st.markdown(
             "Upload financial documents (PDF, TXT) and chat with them using AI. Get summaries, ask questions, and detect red flags.")

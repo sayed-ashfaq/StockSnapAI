@@ -14,12 +14,17 @@ load_dotenv()
 
 class StockAnalyzer:
     def __init__(self):
-        self.llm = init_chat_model(model="gpt-4o-mini", model_provider="openai")
-        self.tavily_search_tool = TavilySearch(
-            max_results=5,
-            topic="news",
-        )
-        self.agent = create_react_agent(self.llm, [self.tavily_search_tool])
+        try:
+            self.llm = init_chat_model(model="gpt-4o-mini", model_provider="openai")
+            self.tavily_search_tool = TavilySearch(
+                max_results=5,
+                topic="news",
+            )
+            self.agent = create_react_agent(self.llm, [self.tavily_search_tool])
+            self.initialized = True
+        except Exception as e:
+            self.initialized = False
+            self.error_message = str(e)
 
     def get_sentiment_color(self, sentiment):
         """Return color based on sentiment"""
@@ -113,6 +118,12 @@ class StockAnalyzer:
             return None
 
     def render(self):
+        # Check if properly initialized
+        if not self.initialized:
+            st.error(f"❌ Stock Analyzer initialization failed: {self.error_message}")
+            st.info("Please check your API keys in the sidebar.")
+            return
+
         st.header("📈 Stock News & Sentiment Analysis")
         st.markdown("Enter stock symbols to get real-time news analysis with AI-powered sentiment scoring.")
 
