@@ -1,16 +1,42 @@
-# This is a sample Python script.
+import streamlit as st
+import sys
+import os
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Add modules to path
+sys.path.append(os.path.join(os.path.dirname(__file__), 'modules'))
+
+from prototype.stock_analyzer import StockAnalyzer
+from prototype.document_chat import DocumentChat
+
+st.set_page_config(
+    page_title="AI Finance Copilot",
+    page_icon="📊",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def main():
+    st.title("🤖 AI Finance Copilot")
+    st.markdown("*Your AI-powered assistant for stock analysis and document insights*")
+
+    # Sidebar for navigation
+    with st.sidebar:
+        st.header("Navigation")
+        tab_selection = st.radio(
+            "Select Module:",
+            ["📈 Stock News & Sentiment", "📄 Document Chat & Analysis"],
+            index=0
+        )
+
+    # Main content area
+    if tab_selection == "📈 Stock News & Sentiment":
+        stock_analyzer = StockAnalyzer()
+        stock_analyzer.render()
+    else:
+        document_chat = DocumentChat()
+        document_chat.render()
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    main()
