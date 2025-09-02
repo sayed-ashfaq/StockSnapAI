@@ -102,7 +102,7 @@
       <recent name="S:\Generative AI\StockSnapAI\src\services" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tools">
+  <component name="RunManager">
     <configuration name="config_loader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />
