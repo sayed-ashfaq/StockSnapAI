@@ -5,6 +5,7 @@ packages= [
     "langchain",
     "langchain-openai",
     "langchain-google-genai",
+    "langchain-groq",
     "langchain-tavily",
     "langchain-community",
     "langgraph",
@@ -12,7 +13,9 @@ packages= [
     "pandas",
     "pypdf",
     "faiss-cpu",
-    "structlog"
+    "structlog",
+    "chardet",
+    "charset-normalizer"
 ]
 
 for package in packages:
