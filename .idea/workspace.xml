@@ -5,10 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/StockSnapAI.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/StockSnapAI.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stock_Summarizer.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exceptions/custom_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/exceptions/custom_exception.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exceptions/external.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/logger/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_utils/custom_logging.py" beforeDir="false" afterPath="$PROJECT_DIR$/logger/custom_logging.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototype/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototype/document_chat.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/document_chat.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prototype/stock_analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/stock_analyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/modules/stock_analyzer.py" beforeDir="false" afterPath="$PROJECT_DIR$/modules/stock_analyzer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/news_summarizer/chat_module.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/news_summarizer/data_ingestion.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/news_summarizer/news_parser.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/external/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/external/google_news_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/external/llm_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/external/news_api.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/external/tavily_client.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/external/web_scrapper_archived.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/news_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stock_analyzer/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/stock_analyzer/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/model_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/text_processing.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,21 +85,46 @@
     "Python.test.executor": "Run",
     "Python.test_news_service.executor": "Run",
     "Python.test_tavily_news.executor": "Run",
+    "Python.tools.executor": "Run",
+    "Python.versions.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "S:/Generative AI/StockSnapAI",
+    "last_opened_file_path": "C:/Users/302sy/Desktop/Generative AI/StockSnapAI",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI" />
+      <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI\static" />
       <recent name="S:\Generative AI\StockSnapAI" />
       <recent name="S:\Generative AI\StockSnapAI\src\services" />
-      <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.tools">
+    <configuration name="config_loader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="StockSnapAI" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/config_loader.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="custom_exception" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />
@@ -119,28 +169,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="news" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="StockSnapAI" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/notebooks" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/notebooks/news.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test_news_service" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />
@@ -163,7 +191,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_tavily_news" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="tools" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -172,11 +200,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/examples" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/examples/test_tavily_news.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/tools.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -187,11 +215,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.tools" />
+        <item itemvalue="Python.config_loader" />
+        <item itemvalue="Python.custom_exception" />
         <item itemvalue="Python.main" />
         <item itemvalue="Python.test_news_service" />
-        <item itemvalue="Python.test_tavily_news" />
-        <item itemvalue="Python.news" />
-        <item itemvalue="Python.custom_exception" />
       </list>
     </recent_temporary>
   </component>
@@ -228,11 +256,11 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/exceptions/custom_exception.py</url>
-          <line>61</line>
+          <line>72</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/log_utils/custom_logging.py</url>
+          <url>file://$PROJECT_DIR$/logger/custom_logging.py</url>
           <line>1</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
@@ -248,7 +276,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>188</line>
+          <line>189</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
       </breakpoints>

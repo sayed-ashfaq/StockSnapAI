@@ -1,34 +1,34 @@
-import os
-from datetime import timedelta
-from typing import Optional
-from pydantic_settings import BaseSettings
+from typing import List, Optional
+from pydantic import BaseModel
+from datetime import datetime
 
+# Individual stock analysis
+class StockAnalysis(BaseModel):
+    symbol: str
+    sentiment: str
+    category: str
+    impact: str
+    summary: str
+    published_at: Optional[datetime] = None  # article published date & time
 
-class Settings(BaseSettings):
-    # API Keys
-    OPENAI_API_KEY: Optional[str] = None
-    NEWS_API_KEY: Optional[str] = None
+# Portfolio summary model
+class PortfolioSummary(BaseModel):
+    overall_sentiment: str
+    analysis_date: datetime
+    summary: str
+    market_themes: List[str]
+    risks: List[str]
+    opportunities: List[str]
 
-    # News API Settings
-    NEWS_API_BASE_URL: str = "https://newsapi.org/v2"
-    NEWS_DAYS_BACK: int = 3
-    NEWS_PAGE_SIZE: int = 3
-    NEWS_LANGUAGE: str = "en"
-    NEWS_SORT_BY: str = "publishedAt"
+# Statistics
+class PortfolioStats(BaseModel):
+    sentiment_distribution: dict
+    price_impact_distribution: dict
 
-    # Web Scraping Settings
-    SCRAPING_TIMEOUT: int = 30
-    SCRAPING_MAX_RETRIES: int = 3
-    SCRAPING_DELAY: float = 1.0
-    USER_AGENT: str = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+# Final full report model
+class PortfolioReport(BaseModel):
+    stocks_analyzed: List[str]
+    summary: PortfolioSummary
+    individual_stocks: List[StockAnalysis]
+    stats: PortfolioStats
 
-    # Rate Limiting
-    NEWS_API_RATE_LIMIT: int = 1000  # requests per day
-    SCRAPING_RATE_LIMIT: int = 10  # requests per minute
-
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
-
-
-settings = Settings()

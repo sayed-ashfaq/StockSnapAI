@@ -3,8 +3,8 @@ faiss_db:
 
 
 embedding_model:
-  provider: "google"
-  model_name: "models/text-embedding-001"
+  provider: "openai"
+  model_name: "text-embedding-3-small"
 
 retriever:
   top_k: 10
@@ -13,17 +13,17 @@ llm:
   groq:
     provider: "groq"
     model_name: "deepseek-r1-distill-llama-70b"
-    temperature: 0
+    temperature: 0.2
     max_output_tokens: 2048
 
   google:
     provider: "google"
     model_name: "gemini-2.0-flash"
-    temperature: 0
+    temperature: 0.2
     max_output_tokens: 2048
 
   openai:
     provider: "openai"
-    model_name: "o4-mini"
-    temperature: 0
+    model_name: "gpt-4o-mini"
+    temperature: 0.2
     max_output_tokens: 2048

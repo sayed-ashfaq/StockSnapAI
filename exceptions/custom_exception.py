@@ -59,11 +59,22 @@ class CustomException(Exception):
         return f"DocumentPortalException(file= {self.file_name}), lineno= {self.lineno}, message= {self.error_message}"
 
 
+# CLASS FOR STOCKANLYSER - Tavily API Error
+class TavilyAPIError(CustomException):
+    """Exception raised for Tavily API errors"""
+    def __init__(self, message: str, status_code: Optional[int] = None,error_details: Optional[object] = None):
+        self.message = message
+        self.status_code = status_code
+        super().__init__(self.message, error_details)
+
+
+
+
 if __name__ == "__main__":
     # demo1 Division error
     # demo 2 str to int error
     try:
         a= int("Str")
     except Exception as e:
-        raise CustomException("Division Failed", e) from e
+        raise TavilyAPIError("Tavily API Error - Please verify Tavily API Key", e) from e
 

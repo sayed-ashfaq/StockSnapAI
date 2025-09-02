@@ -2,11 +2,13 @@ import os
 import sys
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-# from openai.types import embedding_model
+from langchain_openai import OpenAIEmbeddings
 from utils.config_loader import load_config
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
+
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 class ModelLoader:
     """
@@ -34,9 +36,9 @@ class ModelLoader:
         :return:
         """
         model_name= self.config["embedding_model"]["model_name"]
-        return GoogleGenerativeAIEmbeddings(model= model_name)
+        return OpenAIEmbeddings(model= model_name)
 
-    def load_llm(self, model_name= "groq"):
+    def load_llm(self, model_name= "openai"):
         """Initiate and load the LLM model."""
         llm_block= self.config["llm"]
 

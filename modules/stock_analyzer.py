@@ -19,6 +19,7 @@ class StockAnalyzer:
             self.tavily_search_tool = TavilySearch(
                 max_results=5,
                 topic="news",
+                time_range= "week"
             )
             self.agent = create_react_agent(self.llm, [self.tavily_search_tool])
             self.initialized = True
@@ -63,7 +64,7 @@ class StockAnalyzer:
                     {{
                         "stock_symbol": "SYMBOL",
                         "sentiment": "STRONG POSITIVE/POSITIVE/NEUTRAL/NEGATIVE/STRONG NEGATIVE",
-                        "quick_summary": "1-2 line summary of recent developments and outlook",
+                        "quick_summary": "2-3 line summary of recent developments and outlook",
                         "key_news_category": "earnings/regulatory/product/general",
                         "price_impact": "BULLISH/NEUTRAL/BEARISH"
                     }}

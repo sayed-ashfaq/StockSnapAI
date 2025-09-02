@@ -3,5 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="StockSnapAI (2)" />
   </component>
-  <component name="ProjectRootManager" version="2" project-jdk-name="stocksnap" project-jdk-type="Python SDK" />
+  <component name="ProjectRootManager" version="2" project-jdk-name="StockSnapAI" project-jdk-type="Python SDK" />
 </project>

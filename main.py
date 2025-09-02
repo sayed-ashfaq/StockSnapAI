@@ -2,8 +2,9 @@ import streamlit as st
 import sys
 import os
 
-# Add modules to path
-sys.path.append(os.path.join(os.path.dirname(__file__), 'modules'))
+# Add modules to path - so that sys consider the modules as well
+sys.path.append(os.path.join(os.path.dirname(__file__), "modules"))
+
 
 from modules.stock_analyzer import StockAnalyzer
 from modules.document_chat import DocumentChat
@@ -13,7 +14,7 @@ st.set_page_config(
     page_icon="📊",
     layout="wide",
     initial_sidebar_state="expanded"
-)
+) # Setup the page or canvas you can say
 
 
 def main():
