@@ -13,3 +13,5 @@ faiss-cpu==1.12.0
 structlog==24.4.0
 chardet==5.2.0
 charset-normalizer==3.3.2
+fastapi==0.116.1
+

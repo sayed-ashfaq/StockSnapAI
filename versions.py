@@ -15,7 +15,8 @@ packages= [
     "faiss-cpu",
     "structlog",
     "chardet",
-    "charset-normalizer"
+    "charset-normalizer",
+    "fastapi"
 ]
 
 for package in packages:

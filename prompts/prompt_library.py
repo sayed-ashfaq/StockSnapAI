@@ -1,62 +1,47 @@
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+from langchain_core.messages import HumanMessage
+from datetime import datetime
 
 # PROMPT FOR NEWS SUMMARIZER
 
-document_summarize_prompt = ChatPromptTemplate.from_template(
-    """
-    You are an expert at reading news in perspective of stock markets. 
-    You can summarize any news articles removing all unnecessary information that is unrelated to stocks
-    and can help the user to understand the news articles.
-    
-    {format_instructions}
-    
-    Analyze and summarize the news articles given below
-    {document_text}
-    """
-)
-#  CONTEXTUALIZE QUESTION PROMPT
-qa_history_prompt = ChatPromptTemplate.from_messages([
-    ("system", """
-        You are a helpful assistant specialized in reformulating follow-up questions 
-        about stock market news into standalone questions. 
-        Use only the provided conversation history to infer missing details.
-        Do not answer the question here; only rephrase it.
-    """),
-    MessagesPlaceholder("chat_history"),
-    ("human", "{input}")
-])
+# Search for news about all stocks
+STOCKANALYZER_PROMPT = [HumanMessage(content=f"""
+            Search for the latest news about these stocks: {', '.join(stock_symbols)} and provide a comprehensive portfolio analysis.
 
-# PROMPT FOR QA_CONTEXT_CONVERSATION
+            Please provide the analysis in the following JSON format:
+            {{
+                "portfolio_analysis": {{
+                    "analysis_date": "{datetime.now().strftime('%Y-%m-%d %H:%M')}",
+                    "portfolio_stocks": {stock_symbols},
+                    "overall_portfolio_sentiment": "STRONG POSITIVE/POSITIVE/NEUTRAL/NEGATIVE/STRONG NEGATIVE",
+                    "portfolio_summary": "2-3 sentence overall market outlook for this portfolio based on recent news and trends",
+                    "market_themes": ["key market theme 1", "key market theme 2", "key market theme 3"],
+                    "portfolio_risks": ["risk factor 1", "risk factor 2"],
+                    "portfolio_opportunities": ["opportunity 1", "opportunity 2"]
 
-qa_context_history_prompt = ChatPromptTemplate.from_messages([
-    (
-        "system",
-        """
-        You are a financial news analysis assistant specialized in the stock market.
-        Your role is to help the user understand the implications of the provided news content 
-        on specific stocks or the broader market.
 
-        IMPORTANT RULES:
-        - Do NOT give direct buy or sell recommendations.
-        - Base your answers ONLY on the provided context and conversation history.
-        - Present insights in a clear, concise, and factual manner.
-        - If information is missing, say you don’t know rather than speculating.
-        - Always append a one-line disclaimer: 
-          "Disclaimer: The above is for informational purposes only. News may be favorable, 
-          but trades are at your own risk."
+                }},
+                "individual_stocks": [
+                    {{
+                        "stock_symbol": "SYMBOL",
+                        "sentiment": "STRONG POSITIVE/POSITIVE/NEUTRAL/NEGATIVE/STRONG NEGATIVE",
+                        "quick_summary": "2-3 line key bullet point summary that can help traders to analyze stock",
+                        "key_news_category": "earnings/regulatory/product/general",
+                        "price_impact": "BULLISH/NEUTRAL/BEARISH",
+                        "source link": [source_links],
+                        "published_date": [last_published_date],
+                    }}
+                ]
+            }}
 
-        You are provided with:
-        - Conversation history
-        - Retrieved context from relevant news articles
-        
-        Context:
-        """
-    ),
-    ('system', "{documents}"),
-    MessagesPlaceholder("chat_history"),
-    ("human", "{input}")
-])
-
+            Instructions:
+            - Focus on the most recent and impactful news for each stock
+            - Provide portfolio-level insights that consider correlations and sector trends
+            - Keep individual stock summaries concise but informative
+            - Identify common themes across the portfolio
+            - Consider both individual stock performance and broader market implications
+            - Everything should be in a way that is helpful to trader to analyze stocks
+            """)]
 ## CENTRAL DICTIONARY TO REGISTER PROMPTS
 
 # PROMPT_REGISTRY = {

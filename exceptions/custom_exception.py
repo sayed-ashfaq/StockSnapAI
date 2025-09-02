@@ -4,7 +4,7 @@ import sys
 import traceback
 from typing import Optional, cast
 
-class CustomException(Exception):
+class DocumentPortalException(Exception):
     def __init__(self, error_message, error_details: Optional[object] = None):
         # Normalize message
         if isinstance(error_message, BaseException):
@@ -60,11 +60,17 @@ class CustomException(Exception):
 
 
 # CLASS FOR STOCKANLYSER - Tavily API Error
-class TavilyAPIError(CustomException):
+class TavilyAPIError(DocumentPortalException):
     """Exception raised for Tavily API errors"""
     def __init__(self, message: str, status_code: Optional[int] = None,error_details: Optional[object] = None):
         self.message = message
         self.status_code = status_code
+        super().__init__(self.message, error_details)
+
+class PortfolioAnalyzerError(DocumentPortalException):
+    def __init__(self, message: str, error_details: Optional[object] = None):
+        self.message = message
+        self.status_code = error_details
         super().__init__(self.message, error_details)
 
 

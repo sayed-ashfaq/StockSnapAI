@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/utils/files_io.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exceptions/custom_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/exceptions/custom_exception.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/understading_agent.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/understading_agent.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/prompt_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/prompt_library.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/news_summarizer/stock_news.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/news_summarizer/stock_news.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tool_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/agent_loader.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/versions.py" beforeDir="false" afterPath="$PROJECT_DIR$/versions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -232,7 +236,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/exceptions/custom_exception.py</url>
-          <line>72</line>
+          <line>78</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
