@@ -2,7 +2,6 @@
 Test the news service with Tavily integration
 """
 import sys
-import os
 from pathlib import Path
 
 # Add the project root to Python path
@@ -16,7 +15,7 @@ def test_tavily_news_service():
     try:
         # Test environment loading
         print("1. Testing environment variables...")
-        from config.settings import settings
+        from src.portfolio_summarizer.schemas import settings
 
         # Check required API keys
         required_keys = {

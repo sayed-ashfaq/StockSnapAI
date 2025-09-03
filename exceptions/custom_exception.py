@@ -73,6 +73,22 @@ class PortfolioAnalyzerError(DocumentPortalException):
         self.status_code = error_details
         super().__init__(self.message, error_details)
 
+class FileProcessingError(DocumentPortalException):
+    """Raised when file processing fails"""
+    pass
+
+class EmbeddingError(DocumentPortalException):
+    """Raised when embedding generation fails"""
+    pass
+
+class ChatError(DocumentPortalException):
+    """Raised when chat processing fails"""
+    pass
+
+class VectorStoreError(DocumentPortalException):
+    """Raised when vector store operations fail"""
+    pass
+
 
 
 

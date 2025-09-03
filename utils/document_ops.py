@@ -3,10 +3,17 @@ from pathlib import Path
 from typing import Iterable, List
 from fastapi import UploadFile
 from langchain.schema import Document
-from langchain_community.document_loaders import PyPDFLoader, Docx2txtLoader, TextLoader, UnstructuredImageLoader, UnstructuredExcelLoader
+from langchain_community.document_loaders import (PyPDFLoader,
+                                                  Docx2txtLoader,
+                                                  TextLoader,
+                                                  UnstructuredImageLoader,
+                                                  UnstructuredExcelLoader,
+                                                  UnstructuredMarkdownLoader,
+                                                  UnstructuredPowerPointLoader,
+                                                  )
 from logger import GLOBAL_LOGGER as log
 from exceptions.custom_exception import DocumentPortalException
-SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt",} #".xlsx", ".xls", '.csv', '.pdf'}
+SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt",".xlsx",'.csv', '.png','.jpeg', '.jpg' '.ppt'}
 
 
 def load_documents(paths: Iterable[Path]) -> List[Document]:
@@ -22,6 +29,14 @@ def load_documents(paths: Iterable[Path]) -> List[Document]:
                 loader = Docx2txtLoader(str(p))
             elif ext == ".txt":
                 loader = TextLoader(str(p), encoding="utf-8")
+            elif ext == '.xlsx':
+                loader = UnstructuredExcelLoader(str(p))
+            elif ext in ('.jpg', '.jpeg', '.png'):
+                loader = UnstructuredImageLoader(str(p))
+            elif ext == '.ppt':
+                loader = UnstructuredPowerPointLoader(str(p))
+            elif ext == '.md':
+                loader = UnstructuredMarkdownLoader(str(p))
             else:
                 log.warning("Unsupported extension skipped", path=str(p))
                 continue

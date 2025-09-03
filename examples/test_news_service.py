@@ -3,7 +3,6 @@
 Test the complete stock news analysis system
 """
 import sys
-import os
 from pathlib import Path
 
 # Add the project root to Python path
@@ -16,7 +15,7 @@ def test_complete_analysis():
     try:
         # Check environment variables
         print("1. Checking environment variables...")
-        from config.settings import settings
+        from src.portfolio_summarizer.schemas import settings
 
         required_keys = {
             'TAVILY_API_KEY': settings.TAVILY_API_KEY,

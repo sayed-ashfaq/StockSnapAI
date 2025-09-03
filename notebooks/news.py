@@ -1,14 +1,12 @@
-import os
 import sys
 import json
 from datetime import datetime
 from typing import List, Dict, Any, Optional
-import uuid
 from zoneinfo import ZoneInfo
 
 from langchain.output_parsers import OutputFixingParser
 from langchain_core.output_parsers import JsonOutputParser
-from langchain_core.messages import HumanMessage, AIMessage
+from langchain_core.messages import HumanMessage
 from langchain_core.runnables import RunnablePassthrough
 from langchain.chains import LLMChain
 from langgraph.prebuilt import create_react_agent
@@ -17,10 +15,10 @@ from langgraph.checkpoint.memory import MemorySaver
 from prompts.prompt_library import PORTFOLIO_ANALYSER_PROMPT
 from utils.model_loader import ModelLoader
 from utils.tool_loader import TavilySearchTool
-from config.settings import PortfolioReport
+from src.portfolio_summarizer.schemas import PortfolioReport
 from utils.files_io import generate_session_id
 
-from exceptions.custom_exception import DocumentPortalException, PortfolioAnalyzerError
+from exceptions.custom_exception import PortfolioAnalyzerError
 from logger import GLOBAL_LOGGER as log
 
 from dotenv import load_dotenv

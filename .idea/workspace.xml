@@ -6,7 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/test_news_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/test_news_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/examples/test_tavily_news.py" beforeDir="false" afterPath="$PROJECT_DIR$/examples/test_tavily_news.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exceptions/custom_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/exceptions/custom_exception.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/document_loaders.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/document_loaders.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/news.py" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/news.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/document_ops.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/document_ops.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,14 +81,15 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI\src\portfolio_summarizer" />
       <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI" />
       <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI\static" />
       <recent name="S:\Generative AI\StockSnapAI" />
       <recent name="S:\Generative AI\StockSnapAI\src\services" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="config_loader" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.custom_exception">
+    <configuration name="custom_exception" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -88,11 +98,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/utils" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/exceptions" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/utils/config_loader.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exceptions/custom_exception.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -177,11 +187,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.custom_exception" />
         <item itemvalue="Python tests.Python tests for test_portfolio_analyser.test_cache_usage" />
         <item itemvalue="Python tests.Python tests for test_portfolio_analyser.test_analyze_portfolio_batch_basic" />
         <item itemvalue="Python.news" />
         <item itemvalue="Python.tool_loader" />
-        <item itemvalue="Python.config_loader" />
       </list>
     </recent_temporary>
   </component>
@@ -218,7 +228,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/exceptions/custom_exception.py</url>
-          <line>78</line>
+          <line>94</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -228,7 +238,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/examples/test_news_service.py</url>
-          <line>71</line>
+          <line>70</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">

@@ -1,6 +1,16 @@
 faiss_db:
   collection_name: "StockSnapAI"
 
+chroma_db:
+  CHROMA_PERSIST_DIRECTORY: "./vdb_data/chroma_db"
+  CHUNK_SIZE: 1000
+  CHUNK_OVERLAP: 200
+  RETRIEVAL_K: 4
+
+ # File Configuration
+UPLOAD_DIR: "./uploads"
+MAX_FILE_SIZE:  50 * 1024 * 1024  # 50MB
+ALLOWED_EXTENSIONS:  [".pdf", ".txt", ".docx", ".xlsx", ".csv"]
 
 embedding_model:
   provider: "openai"

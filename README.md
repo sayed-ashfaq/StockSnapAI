@@ -150,4 +150,26 @@ For collaboration or updates on the full version:
 
 ---
 
-Would you like me to also **make a GitHub-ready version with actual Markdown formatting + screenshot placeholders replaced with your uploaded images** (renamed properly into a `/screenshots/` folder)? That way, you can just copy-paste it into your repo.
+## Notes
+
+### 📊 Vector DBs Comparison for RAG Apps (2025)
+
+| Feature / DB                        | **Chroma** 🟢                 | **FAISS** 🟠                       | **Pinecone** 🔵                   | **Weaviate** 🟣              | **Milvus** 🔴              | **Qdrant** 🟤                           |
+| ----------------------------------- | ----------------------------- | ---------------------------------- | --------------------------------- | ---------------------------- | -------------------------- | --------------------------------------- |
+| **Type**                            | Local DB                      | Library (ANN)                      | Managed Cloud DB                  | Hybrid (self-host + cloud)   | Open-source DB             | Open-source DB                          |
+| **Persistence**                     | ✅ Yes                         | ❌ Manual                           | ✅ Yes                             | ✅ Yes                        | ✅ Yes                      | ✅ Yes                                   |
+| **Metadata filtering**              | ✅ Yes                         | ❌ No                               | ✅ Yes                             | ✅ Yes                        | ✅ Yes                      | ✅ Yes                                   |
+| **Multimodal support** (text+image) | ⚠️ Limited (custom)           | ❌ No                               | ✅ Yes (new multimodal support)    | ✅ Yes (via modules)          | ✅ Yes (via plugins)        | ✅ Yes (via payload)                     |
+| **Scalability**                     | ⚠️ Small–medium (10k–1M docs) | ✅ Billions (single machine)        | ✅ Billions (distributed)          | ✅ Billions (distributed)     | ✅ Billions (distributed)   | ✅ 100M+ (distributed)                   |
+| **Cloud-managed option**            | ❌ No                          | ❌ No                               | ✅ Yes                             | ✅ Yes (Weaviate Cloud)       | ✅ (Zilliz Cloud)           | ✅ (Qdrant Cloud)                        |
+| **Self-hosting**                    | ✅ Yes (simple)                | ✅ Yes                              | ❌ Cloud only                      | ✅ Yes                        | ✅ Yes                      | ✅ Yes                                   |
+| **Ease of use**                     | ⭐⭐⭐⭐                          | ⭐⭐                                 | ⭐⭐⭐⭐                              | ⭐⭐⭐                          | ⭐⭐⭐                        | ⭐⭐⭐⭐                                    |
+| **Community/Docs**                  | Medium                        | High (researchers)                 | Very High (enterprise)            | High                         | High                       | Growing fast                            |
+| **Best for**                        | Prototypes, small RAG apps    | Hardcore performance, custom infra | Production SaaS, enterprise scale | Enterprise + semantic search | Open-source, huge datasets | Mid-scale open-source, Rust-based speed |
+
+---
+
+#### ⚡ For Your Case (News + Financial Reports + Images in India)
+
+* Start with **Chroma** → simple, fast iteration.
+* If you **need multimodal embeddings (text + image)**:
