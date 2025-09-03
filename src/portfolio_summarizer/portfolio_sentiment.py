@@ -383,10 +383,12 @@ if __name__ == "__main__":
             symbols = ["AAPL", "GOOGL", "TSLA"]
             result = analyzer.analyze_portfolio_batch(symbols)
             print("=========result=========")
+            print('Note: The data is in json format, view in json viewer for better visibily')
             print(result)
-            print(result['messages'][-1].prety_print())
+
             print(f"Analysis completed: {result.get('analysis_status')}")
             print(f"Session: {analyzer.get_session_info()}")
+            print(f"Session History: {analyzer.get_analysis_history()}")
 
     except Exception as e:
         print(f"Error: {e}")

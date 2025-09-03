@@ -5,14 +5,14 @@ from datetime import datetime
 # PROMPT FOR NEWS SUMMARIZER
 
 # Search for news about all stocks
-STOCKANALYZER_PROMPT = [HumanMessage(content=f"""
-            Search for the latest news about these stocks: {', '.join(stock_symbols)} and provide a comprehensive portfolio analysis.
+PORTFOLIO_ANALYSER_PROMPT = [HumanMessage(content="""
+            Search for the latest news about these stocks: {portfolio} and provide a comprehensive portfolio analysis.
 
             Please provide the analysis in the following JSON format:
             {{
                 "portfolio_analysis": {{
-                    "analysis_date": "{datetime.now().strftime('%Y-%m-%d %H:%M')}",
-                    "portfolio_stocks": {stock_symbols},
+                    "analysis_date": "{current_date}",
+                    "portfolio_stocks": {portfolio},
                     "overall_portfolio_sentiment": "STRONG POSITIVE/POSITIVE/NEUTRAL/NEGATIVE/STRONG NEGATIVE",
                     "portfolio_summary": "2-3 sentence overall market outlook for this portfolio based on recent news and trends",
                     "market_themes": ["key market theme 1", "key market theme 2", "key market theme 3"],

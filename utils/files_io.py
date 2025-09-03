@@ -10,13 +10,14 @@ from logger import GLOBAL_LOGGER as log
 from exceptions.custom_exception import DocumentPortalException
 
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt", ".csv", ".xlsx"}
+IST= ZoneInfo("Asia/Kolkata")
+
 
 # ----------------------------- #
 # Helpers (file I/O + loading)  #
 # ----------------------------- #
 def generate_session_id(prefix: str = "session") -> str:
-    ist = ZoneInfo("Asia/Kolkata")
-    return f"{prefix}_{datetime.now(ist).strftime('%Y%m%d_%H%M%S')}_{uuid.uuid4().hex[:8]}"
+    return f"{prefix}_{datetime.now(IST).strftime('%Y%m%d%H%M%S')}_{uuid.uuid4().hex[:8]}"
 
 def save_uploaded_files(uploaded_files: Iterable, target_dir: Path) -> List[Path]:
     """Save uploaded files (Streamlit-like) and return local paths."""
