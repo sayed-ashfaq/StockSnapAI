@@ -14,7 +14,8 @@ class Settings(BaseSettings):
     # AI Configuration
     OPENAI_API_KEY: Optional[str] = None
     GOOGLE_API_KEY: Optional[str] = None
-    EMBEDDING_MODEL: str = "text-embedding-3-large"
+    EMBEDDING_MODEL: str = "multimodalembedding"
+    EMBEDDING_PROVIDER: str = "google-gemini"
     LLM_MODEL: str = "gpt-4o"
     LLM_PROVIDER: str = "openai"
 
@@ -23,11 +24,12 @@ class Settings(BaseSettings):
     CHUNK_SIZE: int = 1000
     CHUNK_OVERLAP: int = 200
     RETRIEVAL_K: int = 4
+    ANONYMIZED_TELEMETRY:bool = False
 
     # File Configuration
     UPLOAD_DIR: str = "./uploads"
     MAX_FILE_SIZE: int = 50 * 1024 * 1024  # 50MB
-    ALLOWED_EXTENSIONS: list = [".pdf", ".txt", ".docx", ".xlsx", ".csv"]
+    ALLOWED_EXTENSIONS: list = [".pdf", ".txt", ".docx", ".xlsx", ".csv", '.jpeg', '.png', '.jpg']
 
     # Database Configuration
     DATABASE_URL: Optional[str] = None
