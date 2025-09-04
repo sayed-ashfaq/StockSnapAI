@@ -47,5 +47,5 @@ class ChatRequest(BaseModel):
 class ChatResponse(BaseModel):
     answer: str
     sources: List[Dict[str, Any]]
-    document_sources: Dict[str, int]
-    scope: ChatScope
+    confidence_score: Optional[float] = None
+    response_time_ms: int

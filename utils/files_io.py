@@ -1,13 +1,15 @@
 from __future__ import annotations
 import re
 import uuid
-from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
-import uuid
-from typing import Iterable, List
+from typing import Iterable, List, Tuple
 from logger import GLOBAL_LOGGER as log
+from src.rag_system.schemas import FileType
 from exceptions.custom_exception import DocumentPortalException
+import hashlib
+import mimetypes
+from pathlib import Path
 
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".txt", ".csv", ".xlsx"}
 IST= ZoneInfo("Asia/Kolkata")
@@ -16,6 +18,35 @@ IST= ZoneInfo("Asia/Kolkata")
 # ----------------------------- #
 # Helpers (file I/O + loading)  #
 # ----------------------------- #
+def generate_document_id(filename: str, file_content: bytes) -> str:
+    """Generate unique document ID based on filename and content hash"""
+    content_hash = hashlib.md5(file_content).hexdigest()[:8]
+    return f"{Path(filename).stem}_{content_hash}_{uuid.uuid4().hex[:8]}"
+
+
+def get_file_type(filename: str) -> Tuple[FileType, str]:
+    """Get file type and MIME type from filename"""
+    ext = Path(filename).suffix.lower()
+    mime_type, _ = mimetypes.guess_type(filename)
+
+    type_mapping = {
+        '.pdf': FileType.PDF,
+        '.txt': FileType.TXT,
+        '.docx': FileType.DOCX,
+        '.xlsx': FileType.EXCEL,
+        '.csv': FileType.CSV,
+    }
+
+    return type_mapping.get(ext, FileType.TXT), mime_type or 'application/octet-stream'
+
+
+def format_file_size(size_bytes: int) -> str:
+    """Format file size in human readable format"""
+    for unit in ['B', 'KB', 'MB', 'GB']:
+        if size_bytes < 1024:
+            return f"{size_bytes:.1f} {unit}"
+        size_bytes /= 1024
+        return f"{size_bytes:.1f} TB"
 def generate_session_id(prefix: str = "session") -> str:
     return f"{prefix}_{datetime.now(IST).strftime('%Y%m%d%H%M%S')}_{uuid.uuid4().hex[:8]}"
 

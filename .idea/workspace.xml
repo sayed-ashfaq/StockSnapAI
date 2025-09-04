@@ -5,17 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/rag_system/chroma_service_arc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exceptions/custom_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/exceptions/custom_exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/document_loaders.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/document_loaders.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/news.py" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/news.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/testing_vector_service.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_vector_service.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/prompt_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/prompt_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rag_system/chat_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/rag_system/chat_engine.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/rag_system/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/rag_system/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rag_system/vector_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/rag_system/vector_service.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/model_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rag_system/vector_service.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/files_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/files_io.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +86,7 @@
       <recent name="S:\Generative AI\StockSnapAI" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.custom_exception">
+  <component name="RunManager">
     <configuration name="custom_exception" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />

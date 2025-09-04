@@ -1,75 +1,34 @@
 import time
 from typing import List, Dict, Any, Optional
-from langchain.chat_models import init_chat_model
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.messages import HumanMessage, AIMessage, SystemMessage
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from config.config import settings
+from utils.model_loader import ModelLoader
 from logger import GLOBAL_LOGGER as logger
 from exceptions.custom_exception import ChatError
-from src.rag_system.vector_service import ChromaManager
+from prompts.prompt_library import RAG_PROMPT, SUMMARY_PROMPT
+from src.rag_system.vector_service import VectorService
 from src.rag_system.schemas import ChatMessage, ChatResponse
-
-logger = setup_logger(__name__)
 
 
 class ChatService:
     def __init__(self, vector_service: VectorService):
         try:
-            self.llm = init_chat_model(
-                model=settings.LLM_MODEL,
-                model_provider=settings.LLM_PROVIDER,
-                openai_api_key=settings.OPENAI_API_KEY
-            )
+            self.llm = ModelLoader().load_llm()
             self.vector_service = vector_service
             self.output_parser = StrOutputParser()
-            self._setup_prompts()
+            self.rag_prompt = RAG_PROMPT
+            self.summary_prompt = SUMMARY_PROMPT
             logger.info("Chat service initialized successfully")
         except Exception as e:
             logger.error(f"Failed to initialize chat service: {e}")
             raise ChatError(f"Chat service initialization failed: {e}")
 
-    def _setup_prompts(self):
-        """Setup prompt templates"""
-        # RAG prompt for document Q&A
-        self.rag_prompt = ChatPromptTemplate.from_messages([
-            ("system", """You are an AI assistant specialized in analyzing financial and business documents. 
-            Use the provided context to answer questions accurately and provide insights.
-
-            Guidelines:
-            - Answer based primarily on the provided context
-            - If information is not in the context, clearly state this
-            - Provide specific citations when possible
-            - Highlight important financial metrics, trends, and red flags
-            - Be concise but comprehensive
-            - Focus on factual information from the documents
-
-            Context: {context}"""),
-            ("human", "{question}")
-        ])
-
-        # Summary prompt
-        self.summary_prompt = ChatPromptTemplate.from_messages([
-            ("system", """You are an expert financial analyst. Create a comprehensive summary of the provided document.
-
-            Structure your summary with these sections:
-            1. **Document Type & Overview**: Identify the document type and main purpose
-            2. **Key Financial Highlights**: Important metrics, performance indicators
-            3. **Key Points**: Main findings, decisions, or statements
-            4. **Red Flags & Concerns**: Potential risks, warnings, or concerning trends
-            5. **Future Outlook**: Forward-looking statements or guidance
-
-            Be specific and include actual numbers/percentages when available.
-            Focus on actionable insights and important details."""),
-            ("human", "Summarize this document:\n\n{content}")
-        ])
-
     def chat_with_document(
-            self,
-            document_id: str,
-            question: str,
-            chat_history: Optional[List[ChatMessage]] = None
+        self,
+        document_id: str,
+        question: str,
+        chat_history: Optional[List[ChatMessage]] = None
     ) -> ChatResponse:
         """Chat with a specific document"""
         start_time = time.time()
@@ -77,8 +36,9 @@ class ChatService:
         try:
             # Retrieve relevant context
             retrieved_docs = self.vector_service.similarity_search(
-                document_id, question, k=settings.RETRIEVAL_K
-            )
+                document_id= document_id,
+                query=question,
+                k=settings.RETRIEVAL_K)
 
             if not retrieved_docs:
                 raise ChatError("No relevant context found in document")
@@ -86,22 +46,33 @@ class ChatService:
             # Prepare context
             context = self._format_context(retrieved_docs)
 
+            # Prepare chat history string
+            history_str = ""
+            if chat_history:
+                for msg in chat_history:
+                    history_str += f"{msg.role.upper()}: {msg.content}\n"
+
             # Build chain
             chain = (
-                    {"context": RunnablePassthrough(), "question": RunnablePassthrough()}
-                    | self.rag_prompt
-                    | self.llm
-                    | self.output_parser
+                {
+                    "context": RunnablePassthrough(),
+                    "question": RunnablePassthrough(),
+                    "chat_history": RunnablePassthrough(),
+                }
+                | self.rag_prompt
+                | self.llm
+                | self.output_parser
             )
 
             # Generate response
-            response = chain.invoke({"context": context, "question": question})
+            response = chain.invoke(
+                {"context": context, "question": question, "chat_history": history_str}
+            )
 
             # Prepare sources
             sources = self._format_sources(retrieved_docs)
 
             response_time = int((time.time() - start_time) * 1000)
-
             logger.info(f"Generated response for document {document_id} in {response_time}ms")
 
             return ChatResponse(
