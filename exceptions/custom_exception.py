@@ -92,6 +92,7 @@ class VectorStoreError(DocumentPortalException):
 
 
 
+
 if __name__ == "__main__":
     # demo1 Division error
     # demo 2 str to int error
