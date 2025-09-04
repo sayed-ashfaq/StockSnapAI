@@ -5,6 +5,7 @@ from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 from utils.config_loader import load_config
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
+# from vertexai.
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
 
