@@ -14,8 +14,8 @@ class Settings(BaseSettings):
     # AI Configuration
     OPENAI_API_KEY: Optional[str] = None
     GOOGLE_API_KEY: Optional[str] = None
-    EMBEDDING_MODEL: str = "multimodalembedding"
-    EMBEDDING_PROVIDER: str = "google-gemini"
+    EMBEDDING_MODEL: str = "text-embedding-3-small"
+    EMBEDDING_PROVIDER: str = "openai"
     LLM_MODEL: str = "gpt-4o"
     LLM_PROVIDER: str = "openai"
 

@@ -5,14 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/rag_system/chroma_service_arc.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/testing_vector_service.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_vector_service.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prompts/prompt_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/prompt_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rag_system/chat_engine.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/rag_system/chat_engine.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rag_system/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/rag_system/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/rag_system/vector_service.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/files_io.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/files_io.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/chroma_index/test_session/0e517819-c81d-4086-be49-8d599f9079b3/data_level0.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/chroma_index/test_session/0e517819-c81d-4086-be49-8d599f9079b3/header.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/chroma_index/test_session/0e517819-c81d-4086-be49-8d599f9079b3/length.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/chroma_index/test_session/0e517819-c81d-4086-be49-8d599f9079b3/link_lists.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/chroma_index/test_session/chroma.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/chroma_index/test_session/ingested_meta.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/rag_system/vector_service.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/rag_system/vector_service.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/model_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_loader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +24,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="Jupyter Notebook" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -86,7 +88,7 @@
       <recent name="S:\Generative AI\StockSnapAI" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.custom_exception">
     <configuration name="custom_exception" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />

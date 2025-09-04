@@ -1,5 +1,5 @@
 from typing import List
-from langchain_community.vectorstores import Chroma
+from langchain_chroma import Chroma
 from langchain_core.documents import Document
 from config.config import settings
 from logger import GLOBAL_LOGGER as logger
@@ -10,7 +10,7 @@ from utils.model_loader import ModelLoader
 class VectorService:
     def __init__(self):
         try:
-            self.embeddings = ModelLoader().load_llm()
+            self.embeddings = ModelLoader().load_embedding_model()
             self.vector_store = None
             logger.info("Vector service initialized successfully")
         except Exception as e:
@@ -37,7 +37,7 @@ class VectorService:
                 self.create_collection(document_id)
 
             self.vector_store.add_documents(documents)
-            self.vector_store.persist()
+            # self.vector_store.persist()
             logger.info(f"Added {len(documents)} documents to collection: {document_id}")
         except Exception as e:
             logger.error(f"Failed to add documents: {e}")
@@ -47,7 +47,7 @@ class VectorService:
             self,
             document_id: str,
             query: str,
-            k: int = None
+            k: int = 4
     ) -> List[Document]:
         """Search for similar documents"""
         try:

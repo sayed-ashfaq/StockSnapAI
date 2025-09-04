@@ -8,6 +8,7 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 # from vertexai.
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
+from config.config import settings
 
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
@@ -36,8 +37,7 @@ class ModelLoader:
         load and return the embedding model.
         :return:
         """
-        model_name= self.config["embedding_model"]["model_name"]
-        return OpenAIEmbeddings(model= model_name)
+        return OpenAIEmbeddings(model= settings.EMBEDDING_MODEL)
 
     def load_llm(self, model_name= "openai"):
         """Initiate and load the LLM model."""
