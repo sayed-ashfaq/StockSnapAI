@@ -25,3 +25,5 @@ charset_normalizer
 pandas
 langchain_chroma
 chromadb
+uvicorn
+supabase
