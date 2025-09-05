@@ -20,6 +20,7 @@ class Settings(BaseSettings):
     LLM_PROVIDER: str = "openai"
 
     # Vector Store Configuration
+    model_config = {"extra": "allow"}
     CHROMA_PERSIST_DIRECTORY: str = "./data/chroma_db"
     CHUNK_SIZE: int = 1000
     CHUNK_OVERLAP: int = 200
