@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradePro - Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">📈</span>
+                    <h1>TradePro</h1>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="user-info">
+                    <span class="user-email">{{ user.email }}</span>
+                    <span class="user-provider">{{ user.provider }}</span>
+                </div>
+                <form action="/auth/signout" method="post" style="display: inline;">
+                    <button type="submit" class="btn-signout">Sign Out</button>
+                </form>
+            </div>
+        </header>
+
+        <main class="dashboard-main">
+            <div class="welcome-section">
+                <h2>Welcome to your Trading Dashboard</h2>
+                <p>You are successfully authenticated with {{ user.provider }} auth</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-label">Portfolio Value</span>
+                        <span class="stat-change up">+5.2%</span>
+                    </div>
+                    <div class="stat-value">$124,567.89</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-label">Day P&L</span>
+                        <span class="stat-change up">+$2,341</span>
+                    </div>
+                    <div class="stat-value">+1.9%</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-label">Active Positions</span>
+                        <span class="stat-change neutral">8</span>
+                    </div>
+                    <div class="stat-value">12 Total</div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-header">
+                        <span class="stat-label">Buying Power</span>
+                        <span class="stat-change neutral">Available</span>
+                    </div>
+                    <div class="stat-value">$45,230.12</div>
+                </div>
+            </div>
+
+            <div class="market-overview">
+                <h3>Market Overview</h3>
+                <div class="market-grid">
+                    <div class="market-item">
+                        <span class="market-symbol">S&P 500</span>
+                        <span class="market-value">4,521.23</span>
+                        <span class="market-change up">+0.8%</span>
+                    </div>
+                    <div class="market-item">
+                        <span class="market-symbol">NASDAQ</span>
+                        <span class="market-value">14,125.91</span>
+                        <span class="market-change up">+1.2%</span>
+                    </div>
+                    <div class="market-item">
+                        <span class="market-symbol">DOW</span>
+                        <span class="market-value">35,467.80</span>
+                        <span class="market-change down">-0.3%</span>
+                    </div>
+                    <div class="market-item">
+                        <span class="market-symbol">VIX</span>
+                        <span class="market-value">18.42</span>
+                        <span class="market-change down">-2.1%</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Simple animation for stats
+        window.addEventListener('load', () => {
+            const statValues = document.querySelectorAll('.stat-value');
+            statValues.forEach((stat, index) => {
+                setTimeout(() => {
+                    stat.style.opacity = '1';
+                    stat.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>
