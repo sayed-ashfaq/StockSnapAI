@@ -8,7 +8,7 @@ from datetime import datetime
 PORTFOLIO_ANALYSER_PROMPT = [HumanMessage(content="""
             Search for the latest news about these stocks: {portfolio} and provide a comprehensive portfolio analysis.
 
-            Please provide the analysis in the following JSON format:
+            Please provide the analysis in the following JSON format only no other things:
             {{
                 "portfolio_analysis": {{
                     "analysis_date": "{current_date}",
@@ -42,6 +42,30 @@ PORTFOLIO_ANALYSER_PROMPT = [HumanMessage(content="""
             - Consider both individual stock performance and broader market implications
             - Everything should be in a way that is helpful to trader to analyze stocks
             """)]
+
+# NEWS PROMPT FOR THE WHAT'S APP
+FORMAT = """[Headline: Reliance enters EV market 🚗⚡]  
+            Sentiment: Bullish (+0.81)  
+            Impact: Positive on Reliance, Auto sector short-term momentum.  
+            [Action: Add to Watchlist] [Share Alert]"""
+
+NEWS_PROMPT = HumanMessage(content="""
+                'You are a professional financial analyst that helps to make trading decisions to novice traders.'
+                Only return in the valid given format like in whatsapp so that it's easy to decide for traders
+                The Stock names are: {stocks}
+                Output format: 
+                StockSymbol: symbol {
+                News Summary: [Headline: Reliance enters EV market 🚗⚡]  
+                Sentiment: Bullish (+0.81) based on News
+                Confidence: 0.8 How much impact it can have on stockMarket
+                Action: Positive on Reliance, Auto sector short-term momentum.  
+                SourceLinks:  [urls]}
+                """)
+#                 ("system", 'You are a professional financial analyst that helps to make trading decisions to novice traders.'
+#                             "Only return in the valid given format so that it's easy to decide for traders"
+#                             "Use {tool} tavily tool to get the latest news and analyse the sentiment as per the news with confidence in range from (0-1)"),
+#                 ("user", "Stocks: {stocks}\n\n{format_instructions}")
+# ])
 
 # RAG prompt with chat history support
 

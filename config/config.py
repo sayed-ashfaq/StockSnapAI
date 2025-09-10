@@ -20,7 +20,7 @@ class Settings(BaseSettings):
     LLM_PROVIDER: str = "openai"
 
     # Vector Store Configuration
-    model_config = {"extra": "allow"}
+    # model_config = {"extra": "allow"}
     CHROMA_PERSIST_DIRECTORY: str = "./data/chroma_db"
     CHUNK_SIZE: int = 1000
     CHUNK_OVERLAP: int = 200
@@ -39,9 +39,11 @@ class Settings(BaseSettings):
     LOG_LEVEL: str = "INFO"
     LOG_FILE: str = "logs/app.log"
 
-    class Config:
-        env_file = ".env"
-        case_sensitive = True
+    model_config = {
+        'env_file':'.env',
+        'case_sensitive':True,
+        'extra': 'allow'
+    }
 
 
 settings = Settings()

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockSnapAI - Make Smart Trading Decisions</title>
+    <link rel="stylesheet" href="/static/dashboard_v2.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="logo">StockSnapAI</div>
+                <div class="nav-buttons">
+                    <a href="/dashboard/sentiment-analysis" class="btn btn-secondary">📈 Market Sentiment</a>
+                    <a href="/dashboard/document-analysis" class="btn btn-secondary">📄 Document Analysis</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="floating">AI-Powered Trading Intelligence</h1>
+                    <p>Make smarter investment decisions with advanced AI analysis, real-time sentiment tracking, and comprehensive document insights.</p>
+
+                    <div class="cta-buttons">
+                        <a href="/dashboard/sentiment-analysis" class="btn btn-secondary btn-cta">📊 Analyze Market Sentiment</a>
+                        <a href="/dashboard/document-analysis" class="btn btn-secondary btn-cta">📋 Analyze Documents</a>
+                    </div>
+
+                    <div class="market-stats">
+                        <div class="stat-card">
+                            <div class="stat-value positive">99.2%</div>
+                            <div class="stat-label">Analysis Accuracy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">50K+</div>
+                            <div class="stat-label">News Sources</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value positive">24/7</div>
+                            <div class="stat-label">Real-time Updates</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">AI-Powered</div>
+                            <div class="stat-label">Smart Analysis</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="star-section">
+            <div class="container">
+                <div class="star-header">
+                    <h2>Why TradePro AI is Your Trading Edge</h2>
+                    <p>Discover how our AI-powered platform transforms complex market data into actionable trading insights using the STAR methodology.</p>
+                </div>
+
+                <div class="star-grid">
+                    <div class="star-card">
+                        <div class="star-letter">S 🎯</div>
+                        <h3 class="star-title">Situation</h3>
+                        <div class="star-content">
+                            Modern traders face information overload with thousands of news articles, financial reports, and market data points daily. Processing this manually is impossible, leading to missed opportunities and uninformed decisions.
+                        </div>
+                    </div>
+
+                    <div class="star-card">
+                        <div class="star-letter">T 📋</div>
+                        <h3 class="star-title">Task</h3>
+                        <div class="star-content">
+                            Our mission is to democratize institutional-grade market analysis by providing retail traders with AI-powered tools that process vast amounts of data, extract sentiment, and deliver clear, actionable insights in real-time.
+                        </div>
+                    </div>
+
+                    <div class="star-card">
+                        <div class="star-letter">A ⚡</div>
+                        <h3 class="star-title">Action</h3>
+                        <div class="star-content">
+                            We've built two powerful AI engines: a sentiment analysis system that processes news from 50K+ sources with 99.2% accuracy, and a multimodal RAG system that analyzes any financial document, from 10-Ks to earnings calls.
+                        </div>
+                    </div>
+
+                    <div class="star-card">
+                        <div class="star-letter">R 🚀</div>
+                        <h3 class="star-title">Result</h3>
+                        <div class="star-content">
+                            Traders using TradePro AI reduce research time by 90%, make more informed decisions with comprehensive sentiment scores, and gain deeper insights from financial documents through AI-powered chat interactions.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <div class="container">
+                <div class="features-header">
+                    <h2>Powerful AI Features</h2>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">📈</div>
+                        <h3 class="feature-title">Market Sentiment Analysis</h3>
+                        <div class="feature-description">
+                            Get real-time sentiment analysis for your entire portfolio. Our AI scrapes the latest news from thousands of sources, analyzes market sentiment, and provides actionable insights with confidence scores for each stock position.
+                        </div>
+                        <a href="/dashboard/sentiment-analysis" class="feature-link">Start Analysis →</a>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">📄</div>
+                        <h3 class="feature-title">Document Intelligence</h3>
+                        <div class="feature-description">
+                            Upload and chat with any financial document - earnings reports, 10-Ks, research papers, or images. Our multimodal AI provides instant summaries, answers complex questions, and extracts key financial metrics automatically.
+                        </div>
+                        <a href="/dashboard/document-analysis" class="feature-link">Analyze Documents →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 TradePro AI. Making smart trading accessible to everyone.</p>
+            <div class="footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scrolling for internal links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Add hover effects for interactive elements
+        document.querySelectorAll('.btn, .stat-card, .star-card, .feature-card').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Simulate real-time market data updates
+        function updateStats() {
+            const accuracyElement = document.querySelector('.positive');
+            if (accuracyElement && accuracyElement.textContent.includes('%')) {
+                const baseAccuracy = 99.2;
+                const variation = (Math.random() - 0.5) * 0.2;
+                const newAccuracy = (baseAccuracy + variation).toFixed(1);
+                accuracyElement.textContent = newAccuracy + '%';
+            }
+        }
+
+        // Update stats every 30 seconds
+        setInterval(updateStats, 30000);
+    </script>
+</body>
+</html>

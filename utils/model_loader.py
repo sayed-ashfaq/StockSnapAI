@@ -10,7 +10,6 @@ from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_groq import ChatGroq
 from config.config import settings
 
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 
 class ModelLoader:
     """

@@ -10,7 +10,7 @@ from exceptions.custom_exception import TavilyAPIError
 class TavilySearchTool:
     def __init__(self):
         if os.getenv("ENV", "local").lower() != "production":
-            load_dotenv(verbose=True)
+            load_dotenv()
             log.info("Running TavilySearchTool in LOCAL MODE: .env loaded")
         else:
             log.info("Running TavilySearchTool in PRODUCTION Mode")

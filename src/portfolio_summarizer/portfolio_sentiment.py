@@ -5,17 +5,17 @@ from typing import List, Dict, Any, Optional
 from zoneinfo import ZoneInfo
 
 from langchain.output_parsers import OutputFixingParser
-from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.output_parsers import JsonOutputParser, PydanticOutputParser
 from langchain_core.messages import HumanMessage
 from langchain_core.runnables import RunnablePassthrough
 from langchain.chains import LLMChain
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 
-from prompts.prompt_library import PORTFOLIO_ANALYSER_PROMPT
+from prompts.prompt_library import PORTFOLIO_ANALYSER_PROMPT, NEWS_PROMPT
 from utils.model_loader import ModelLoader
 from utils.tool_loader import TavilySearchTool
-from src.portfolio_summarizer.schemas import PortfolioReport
+from src.portfolio_summarizer.schemas import PortfolioAnalysisResponse, NewsAnalysisResponse
 from utils.files_io import generate_session_id
 
 from exceptions.custom_exception import PortfolioAnalyzerError
@@ -23,42 +23,37 @@ from logger import GLOBAL_LOGGER as log
 
 from dotenv import load_dotenv
 
-load_dotenv()
 IST = ZoneInfo("Asia/Kolkata")
 
 
 class PortfolioAnalyzer:
     def __init__(self, session_id: Optional[str] = None):
         try:
+            load_dotenv()
+
             self.session_id = session_id or generate_session_id()
 
             # Initialize model loader
-            self.loader = ModelLoader()
-            self.llm = self.loader.load_llm()
+            self.llm = ModelLoader().load_llm()
 
             # Load tavily search tool
-            self.tavily_search = TavilySearchTool()
-            self.search_tool = self.tavily_search.load_tavily_tool()
+            self.search_tool = TavilySearchTool().load_tavily_tool()
 
             # Prepare parsers
-            self.parser = JsonOutputParser(pydantic_object=PortfolioReport)
-            self.fixing_parser = OutputFixingParser.from_llm(parser=self.parser, llm=self.llm)
+            self.parser= PydanticOutputParser(pydantic_object=NewsAnalysisResponse)
 
             # Bring prompt
             self.prompt = PORTFOLIO_ANALYSER_PROMPT
 
             # Create a memory checkpointer for conversation persistence
-            self.memory = MemorySaver()
 
-            # Create agent with memory
+            # Create agent
             self.agent_executor = create_react_agent(
                 model=self.llm,
                 tools=[self.search_tool],
-                checkpointer=self.memory
             )
 
             # Thread config for memory management
-            self.thread_config = {"configurable": {"thread_id": self.session_id}}
 
             # Analysis cache for recent results
             self.analysis_cache = {}
@@ -100,7 +95,7 @@ class PortfolioAnalyzer:
         Analyze the following stock portfolio: {', '.join(symbols)}
         Analysis requested at: {request_time}
 
-        Please provide comprehensive analysis in the specified JSON format.
+        Please provide comprehensive analysis in the specified format.
         Focus on recent news, market sentiment, and portfolio-level insights.
         """
 
@@ -115,7 +110,6 @@ class PortfolioAnalyzer:
             # Invoke agent with memory
             result = self.agent_executor.invoke(
                 {"messages": messages},
-                config=self.thread_config
             )
 
             return {

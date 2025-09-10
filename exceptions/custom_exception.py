@@ -73,6 +73,9 @@ class PortfolioAnalyzerError(DocumentPortalException):
         self.status_code = error_details
         super().__init__(self.message, error_details)
 
+class WhatsAppMessengerError(DocumentPortalException):
+    pass
+
 class FileProcessingError(DocumentPortalException):
     """Raised when file processing fails"""
     pass

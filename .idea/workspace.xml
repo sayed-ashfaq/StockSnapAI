@@ -6,6 +6,18 @@
   <component name="ChangeListManager">
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exceptions/custom_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/exceptions/custom_exception.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/testing_chat_engine.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_chat_engine.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/prompt_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/prompt_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/model_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utils/tool_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tool_loader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,9 +27,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="HTML File" />
         <option value="Jupyter Notebook" />
         <option value="Python Script" />
-        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -38,41 +50,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Python tests.Python tests for test_document_service.test_process_image.executor": "Run",
-    "Python tests.Python tests for test_portfolio_analyser.test_analyze_portfolio_batch_basic.executor": "Run",
-    "Python tests.Python tests for test_portfolio_analyser.test_cache_usage.executor": "Run",
-    "Python.RAG_DOC_CHAT.executor": "Run",
-    "Python.config.executor": "Run",
-    "Python.config_loader (1).executor": "Run",
-    "Python.config_loader.executor": "Run",
-    "Python.custom_exception.executor": "Run",
-    "Python.custom_logging (1).executor": "Run",
-    "Python.custom_logging.executor": "Run",
-    "Python.data_ingestion.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.model_loader (1).executor": "Run",
-    "Python.model_loader.executor": "Run",
-    "Python.news.executor": "Run",
-    "Python.news_ingestion.executor": "Run",
-    "Python.portfolio_sentiment.executor": "Run",
-    "Python.streamlit_UI (1).executor": "Run",
-    "Python.streamlit_UI.executor": "Run",
-    "Python.test.executor": "Run",
-    "Python.test_news_service.executor": "Run",
-    "Python.test_tavily_news.executor": "Run",
-    "Python.tools.executor": "Run",
-    "Python.versions.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/302sy/Desktop/Generative AI/StockSnapAI",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Python tests.Python tests for test_document_service.test_process_image.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_portfolio_analyser.test_analyze_portfolio_batch_basic.executor&quot;: &quot;Run&quot;,
+    &quot;Python tests.Python tests for test_portfolio_analyser.test_cache_usage.executor&quot;: &quot;Run&quot;,
+    &quot;Python.RAG_DOC_CHAT.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config.executor&quot;: &quot;Run&quot;,
+    &quot;Python.config_loader (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.config_loader.executor&quot;: &quot;Run&quot;,
+    &quot;Python.custom_exception.executor&quot;: &quot;Run&quot;,
+    &quot;Python.custom_logging (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.custom_logging.executor&quot;: &quot;Run&quot;,
+    &quot;Python.data_ingestion.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.model_loader (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.model_loader.executor&quot;: &quot;Run&quot;,
+    &quot;Python.news.executor&quot;: &quot;Run&quot;,
+    &quot;Python.news_ingestion.executor&quot;: &quot;Run&quot;,
+    &quot;Python.news_n_sentiment.executor&quot;: &quot;Run&quot;,
+    &quot;Python.portfolio_sentiment.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.stock_price.executor&quot;: &quot;Run&quot;,
+    &quot;Python.streamlit_UI (1).executor&quot;: &quot;Run&quot;,
+    &quot;Python.streamlit_UI.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_news_service.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test_tavily_news.executor&quot;: &quot;Run&quot;,
+    &quot;Python.tools.executor&quot;: &quot;Run&quot;,
+    &quot;Python.versions.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/302sy/Desktop/Generative AI/StockSnapAI&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI\templates" />
@@ -82,8 +97,8 @@
       <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.custom_exception">
-    <configuration name="custom_exception" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Python.portfolio_sentiment">
+    <configuration name="portfolio_sentiment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -92,11 +107,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/exceptions" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/portfolio_summarizer" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/exceptions/custom_exception.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -105,7 +120,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="whatsapp_news" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -114,70 +129,23 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/api" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/portfolio_summarizer" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:\Users\302sy\Desktop\Generative AI\StockSnapAI\api\main.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\302sy\Desktop\Generative AI\StockSnapAI\src\portfolio_summarizer\whatsapp_news.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_document_service.test_process_image" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="StockSnapAI" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_document_service.test_process_image&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_portfolio_analyser.test_analyze_portfolio_batch_basic" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="StockSnapAI" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_portfolio_analyser.test_analyze_portfolio_batch_basic&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration name="Python tests for test_portfolio_analyser.test_cache_usage" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="StockSnapAI" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;test_portfolio_analyser.test_cache_usage&quot;" />
-      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python tests.Python tests for test_document_service.test_process_image" />
-        <item itemvalue="Python.custom_exception" />
-        <item itemvalue="Python tests.Python tests for test_portfolio_analyser.test_cache_usage" />
-        <item itemvalue="Python tests.Python tests for test_portfolio_analyser.test_analyze_portfolio_batch_basic" />
+        <item itemvalue="Python.portfolio_sentiment" />
+        <item itemvalue="Python.whatsapp_news" />
       </list>
     </recent_temporary>
   </component>
@@ -214,7 +182,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/exceptions/custom_exception.py</url>
-          <line>95</line>
+          <line>98</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
@@ -233,7 +201,7 @@
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/st_main.py</url>
+          <url>file://$PROJECT_DIR$/main.py</url>
           <line>189</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>

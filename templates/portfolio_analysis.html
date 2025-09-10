@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Market Sentiment Analysis - StockSnapAI</title>
+    <link rel="stylesheet" href="/static/portfolio_analysis.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="/" class="logo">StockSnapAI</a>
+                <div class="nav-buttons">
+                    <a href="/dashboard" class="btn btn-secondary">Dashboard</a>
+                    <a href="/dashboard/sentiment-analysis" class="btn btn-primary">📈 Sentiment Analysis</a>
+                    <a href="/dashboard/document-analysis" class="btn btn-secondary">📄 Document Analysis</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <!-- Left Panel - Portfolio Input -->
+            <div class="left-panel">
+                <div class="panel-header">Stock News & Sentiment Analysis</div>
+                <p style="color: #b0b0b0; margin-bottom: 24px; font-size: 14px;">
+                    Enter stock symbols to get real-time news analysis with AI-powered sentiment scoring
+                </p>
+
+                <div class="input-section">
+                    <label class="input-label">Your Stock Portfolio</label>
+                    <input type="text" id="stockInput" class="stock-input"
+                           placeholder="Enter Stock Symbol (e.g., AAPL, TSLA, NVDA/NYSE)"
+                           maxlength="10">
+                    <button class="add-stock-btn" onclick="addStock()">+ Add Stock</button>
+                </div>
+
+                <div class="portfolio-list">
+                    <label class="input-label">Current Portfolio:</label>
+                    <div id="portfolioList">
+                        <!-- Portfolio items will be added here -->
+                    </div>
+                </div>
+
+                <button class="analyze-btn" id="analyzeBtn" onclick="analyzePortfolio()" disabled>
+                    🚀 Analyze Portfolio
+                </button>
+            </div>
+
+            <!-- Right Panel - Analysis Results -->
+            <div class="right-panel" id="resultsPanel">
+                <div class="empty-state">
+                    <h3>Ready for Analysis</h3>
+                    <p>Add stocks to your portfolio and click "Analyze Portfolio" to get AI-powered sentiment analysis and market insights.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let portfolio = [];
+
+        function addStock() {
+            const input = document.getElementById('stockInput');
+            const symbol = input.value.trim().toUpperCase();
+
+            if (symbol && !portfolio.includes(symbol)) {
+                portfolio.push(symbol);
+                updatePortfolioDisplay();
+                input.value = '';
+            }
+
+            updateAnalyzeButton();
+        }
+
+        function removeStock(symbol) {
+            portfolio = portfolio.filter(stock => stock !== symbol);
+            updatePortfolioDisplay();
+            updateAnalyzeButton();
+
+            if (portfolio.length === 0) {
+                showEmptyState();
+            }
+        }
+
+        function updatePortfolioDisplay() {
+            const portfolioList = document.getElementById('portfolioList');
+
+            if (portfolio.length === 0) {
+                portfolioList.innerHTML = '<p style="color: #666; font-style: italic;">No stocks added yet</p>';
+                return;
+            }
+
+            portfolioList.innerHTML = portfolio.map(symbol => `
+                <div class="portfolio-item">
+                    <span class="stock-symbol">${symbol}</span>
+                    <button class="remove-btn" onclick="removeStock('${symbol}')">Remove</button>
+                </div>
+            `).join('');
+        }
+
+        function updateAnalyzeButton() {
+            const analyzeBtn = document.getElementById('analyzeBtn');
+            analyzeBtn.disabled = portfolio.length === 0;
+        }
+
+        function showEmptyState() {
+            const resultsPanel = document.getElementById('resultsPanel');
+            resultsPanel.innerHTML = `
+                <div class="empty-state">
+                    <h3>Ready for Analysis</h3>
+                    <p>Add stocks to your portfolio and click "Analyze Portfolio" to get AI-powered sentiment analysis and market insights.</p>
+                </div>
+            `;
+        }
+
+        function showLoading() {
+            const resultsPanel = document.getElementById('resultsPanel');
+            resultsPanel.innerHTML = `
+                <div class="loading">
+                    <h3>Analyzing Your Portfolio...</h3>
+                    <p>AI is processing latest news and market data for ${portfolio.length} stocks</p>
+                    <div style="margin-top: 20px;">
+                        <div style="width: 100%; background: #333; border-radius: 10px; overflow: hidden;">
+                            <div style="width: 0%; height: 6px; background: linear-gradient(90deg, #00ff96, #0066ff); animation: progress 50s ease-in-out;" id="progressBar"></div>
+                        </div>
+                    </div>
+                </div>
+                <style>
+                    @keyframes progress {
+                        0% { width: 0%; }
+                        100% { width: 100%; }
+                    }
+                </style>
+            `;
+        }
+
+        function showError(message) {
+            const resultsPanel = document.getElementById('resultsPanel');
+            resultsPanel.innerHTML = `
+                <div class="error-state" style="text-align: center; padding: 40px; color: #ff6b6b;">
+                    <h3>❌ Analysis Failed</h3>
+                    <p>${message}</p>
+                    <button onclick="analyzePortfolio()" style="margin-top: 20px; padding: 10px 20px; background: #ff6b6b; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                        Try Again
+                    </button>
+                </div>
+            `;
+        }
+
+        async function analyzePortfolio() {
+            if (portfolio.length === 0) return;
+
+            showLoading();
+
+            try {
+                const response = await fetch('/dashboard/sentiment-analysis', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(portfolio)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const analysisData = await response.json();
+                showAnalysisResults(analysisData);
+
+            } catch (error) {
+                console.error('Analysis failed:', error);
+                showError(error.message || 'Failed to analyze portfolio. Please try again.');
+            }
+        }
+
+        function showAnalysisResults(analysisData) {
+        const resultsPanel = document.getElementById('resultsPanel');
+        resultsPanel.innerHTML = `
+            <pre style="text-align: left; background: #111; color: #0f0; padding: 15px; border-radius: 8px; overflow-x: auto;">
+${JSON.stringify(analysisData, null, 2)}
+            </pre>
+        `;
+    }
+
+        // Allow Enter key to add stock
+        document.getElementById('stockInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addStock();
+            }
+        });
+
+        // Initialize
+        updatePortfolioDisplay();
+        updateAnalyzeButton();
+    </script>
+</body>
+</html>
