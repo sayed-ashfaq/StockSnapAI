@@ -30,7 +30,8 @@ class WhatsappMessenger:
 
             self.prompt = NEWS_PROMPT
 
-            # self._setup_analysis_chain()
+            self._setup_analysis_chain()
+
             log.info("WhatsAppMessenger initialized successfully")
         except Exception as e:
             log.error(f"WhatsAppMessenger has failed to initiate")
@@ -69,7 +70,19 @@ class WhatsappMessenger:
             log.error(f"WhatsAppMessenger has failed to execute {e}")
             raise WhatsAppMessengerError(f"WhatsAppMessenger agent has failed to execute {e}", sys)
 
+    def analyze_stock(self, ticker:str ):
+        try:
 
+            payload = {
+                "ticker": ticker,
+                "context": self._get_news_context(ticker)
+            }
+            log.info("Initiating analysis chain execution and starting ticker analysis...")
+            response = self.analysis_chain.invoke(payload)
+            return response
+        except Exception as e:
+            log.error(f"Failed to analyze the stock {ticker}")
+            raise WhatsAppMessengerError(f"Failed to analyze the stock {ticker}", sys)
     def _format_response(self,response):
         try:
             pass

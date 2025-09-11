@@ -52,18 +52,20 @@ FORMAT = """[Headline: Reliance enters EV market 🚗⚡]
 
 NEWS_PROMPT = ChatPromptTemplate.from_template("""
 You are a financial analyst who is great at helping trader to make Investment decision better. 
-Summarize the following {stock} stock information clearly and concisely.
+Summarize the following {ticker} stock information clearly and concisely.
 
 Context:
 {context}
 
 Return the output in JSON format with keys:
-- Company name
-- Market Sentiment - [Bearish, Bullish, Neutral]
-- Confidence Score : 0-1 range 
-- Key financial highlights - 2-3 lines
+- stock_symbol : ticker
+- sentiment - [Strong Bearish,Bearish, Bullish, Neutral, Strong Bullish]
+- confidence : 0-1 range 
+- news_summary - 2-3 lines in list
 - Opportunities - one line
-- Risks: str
+- risks: str
+- action_advice
+- source_links (list of links)
 
 if not any relevant info don't give false insights or information. It should be relevant to the stock given.
 """)

@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import List, Optional
+from typing import List, Optional, Union
 from pydantic import BaseModel, Field
 from datetime import datetime
 
@@ -30,11 +30,11 @@ class PortfolioAnalysisResponse(BaseModel):
     opportunities: List[str]
 
 class SentimentEnum(str, Enum):
-    strong_bullish = "strong_bullish"
-    bullish = "bullish"
-    neutral = "neutral"
-    bearish = "bearish"
-    strong_bearish= "strong_bearish"
+    strong_bullish = "Strong Bullish"
+    bullish = "Bullish"
+    neutral = "Neutral"
+    bearish = "Bearish"
+    strong_bearish= "Strong Bearish"
 
 
 class NewsAnalysisResponse(BaseModel):
@@ -46,10 +46,11 @@ class NewsAnalysisResponse(BaseModel):
     source_links: List[str]
 
 class WhatsAppMessageResponse(BaseModel):
-    stock_symbol: str = Field(description="StockSymbol")
-    news_summary: str = Field(description="2-3 line summary of the extracted news")
+    stock_symbol: str
+    news_summary: Union[str, List[str]]
     sentiment: SentimentEnum # bearish, neutral, bullish
-    confidence: float =  Field(..., ge= 0, le= 100) # 0-1
+    confidence: float
+    risks: str
     action_advice: str
     source_links: List[str]
 
