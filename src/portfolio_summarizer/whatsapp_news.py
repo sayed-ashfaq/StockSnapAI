@@ -32,7 +32,7 @@ class WhatsappMessenger:
 
             self._setup_analysis_chain()
 
-            log.info("WhatsAppMessenger initialized successfully")
+            log.info("WhatsAppMessenger chain has been initialized successfully")
         except Exception as e:
             log.error(f"WhatsAppMessenger has failed to initiate")
             raise WhatsAppMessengerError(f"WhatsAppMessenger has failed to initiate {e}", sys)
@@ -79,10 +79,12 @@ class WhatsappMessenger:
             }
             log.info("Initiating analysis chain execution and starting ticker analysis...")
             response = self.analysis_chain.invoke(payload)
+            log.info("Analysis chain executed successfully")
             return response
         except Exception as e:
             log.error(f"Failed to analyze the stock {ticker}")
             raise WhatsAppMessengerError(f"Failed to analyze the stock {ticker}", sys)
+
     def _format_response(self,response):
         try:
             pass

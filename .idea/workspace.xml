@@ -7,8 +7,6 @@
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prompts/prompt_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/prompt_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/whatsapp_news.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/whatsapp_news.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
