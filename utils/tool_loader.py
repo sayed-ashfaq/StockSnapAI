@@ -22,19 +22,43 @@ class TavilySearchTool:
 
         self._tool= None # caching
 
+        self.indian_news_domains = [
+            "economictimes.indiatimes.com",
+            "business-standard.com",
+            "livemint.com",
+            "moneycontrol.com",
+            "financialexpress.com",
+            "zeebiz.com",
+            "cnbctv18.com",
+            "bloombergquint.com",
+            "thehindubusinessline.com",
+            "reuters.com",
+            "nseindia.com",
+            "bseindia.com",
+            "yahoo.com",
+            "tradingview.com",
+            "cnbc.com",
+            'tradingeconomics.com',
+        ]
+
     # Load TAVILY Search tool
-    def load_tavily_tool(self, max_results : int= 5, time_range : str= "week"):
+    def load_tavily_tool(self, max_results : int= 10, time_range : str= "week"):
         if not self._tool:
             try:
                 self._tool = TavilySearch(
                     api_key=self.api_key,
                     max_results=max_results,
                     time_range=time_range,
+                    topic = "news",
+                    search_depth= 'advanced',
+                    include_domains= self.indian_news_domains,
+
+
                 )
                 log.info("TavilySearch tool initialized successfully")
 
             except Exception as e:
-                log.error("Failed to initialize TavilySearch tool", e)
+                log.warning("Failed to initialize TavilySearch tool", e)
                 raise TavilyAPIError("Failed to load TavilyTool", sys)
 
         return self._tool

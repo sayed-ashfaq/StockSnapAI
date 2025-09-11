@@ -6,17 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/exceptions/custom_exception.py" beforeDir="false" afterPath="$PROJECT_DIR$/exceptions/custom_exception.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/testing_chat_engine.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_chat_engine.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/prompts/prompt_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/prompt_library.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/model_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/model_loader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/whatsapp_news.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/whatsapp_news.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/utils/tool_loader.py" beforeDir="false" afterPath="$PROJECT_DIR$/utils/tool_loader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

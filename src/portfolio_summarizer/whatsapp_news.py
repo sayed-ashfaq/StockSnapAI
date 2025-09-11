@@ -1,40 +1,69 @@
 import sys
+from datetime import datetime
+from zoneinfo import ZoneInfo
+
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import PydanticOutputParser
+
 from prompts.prompt_library import NEWS_PROMPT
 from utils.model_loader import ModelLoader
 from utils.tool_loader import TavilySearchTool
 from .schemas import WhatsAppMessageResponse
-
-from langgraph.prebuilt import create_react_agent
-
 from logger import GLOBAL_LOGGER as log
 from exceptions.custom_exception import WhatsAppMessengerError
+
+
 
 class WhatsappMessenger:
     def __init__(self):
         try:
+            # llm
             self.llm= ModelLoader().load_llm()
+            # tavily tool
             self.search_tool = TavilySearchTool().load_tavily_tool()
+
+            # get indian dates
+            IST = ZoneInfo("Asia/Kolkata")
+            self.current_date = datetime.now(IST).strftime("%d-%m-%Y")
+
+            self.parser = PydanticOutputParser(pydantic_object=WhatsAppMessageResponse)
 
             self.prompt = NEWS_PROMPT
 
+            # self._setup_analysis_chain()
+            log.info("WhatsAppMessenger initialized successfully")
         except Exception as e:
             log.error(f"WhatsAppMessenger has failed to initiate")
             raise WhatsAppMessengerError(f"WhatsAppMessenger has failed to initiate {e}", sys)
 
-    def _get_context(self, query):
+    def _get_news_context(self, ticker: str):
+        query = f"{ticker} earning analyst ratings insider trading technical analysis sector news {self.current_date}"
+        search_results = {"results": []}
         try:
-            search_results= self.search_tool.search(
-                query= "")
+
+            search_results = self.search_tool.invoke({"query": query})
+
+            articles = [{
+                "title": r.get("title", ""),
+                "content": r.get("content", ""),
+                'url': r.get("url", ""),
+                'published_date': r.get("published_date", ""),
+                "source": r.get("source", ""),
+                "domain": r.get("domain", ""),
+            } for r in search_results.get("results", [])]
+
+            return articles
         except Exception as e:
             log.error("Failed to get context for query")
             raise WhatsAppMessengerError(f"Unable to extract the context about the given query {e}", sys)
 
-    def execute_agent(self,query:str):
+    def _setup_analysis_chain(self):
         try:
-
-            input_message = {"role": "user", "content": query}
-            log.info("WhatsAppMessenger Agent is running.")
-            return self.agent_executor.invoke({"messages": [input_message]})
+            self.analysis_chain = (
+                self.prompt
+                | self.llm
+                | self.parser
+            )
 
         except Exception as e:
             log.error(f"WhatsAppMessenger has failed to execute {e}")

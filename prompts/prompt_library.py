@@ -49,18 +49,37 @@ FORMAT = """[Headline: Reliance enters EV market 🚗⚡]
             Impact: Positive on Reliance, Auto sector short-term momentum.  
             [Action: Add to Watchlist] [Share Alert]"""
 
-NEWS_PROMPT = HumanMessage(content="""
-                'You are a professional financial analyst that helps to make trading decisions to novice traders.'
-                Only return in the valid given format like in whatsapp so that it's easy to decide for traders
-                The Stock names are: {stocks}
-                Output format: 
-                StockSymbol: symbol {
-                News Summary: [Headline: Reliance enters EV market 🚗⚡]  
-                Sentiment: Bullish (+0.81) based on News
-                Confidence: 0.8 How much impact it can have on stockMarket
-                Action: Positive on Reliance, Auto sector short-term momentum.  
-                SourceLinks:  [urls]}
-                """)
+
+NEWS_PROMPT = ChatPromptTemplate.from_template("""
+You are a financial analyst who is great at helping trader to make Investment decision better. 
+Summarize the following {stock} stock information clearly and concisely.
+
+Context:
+{context}
+
+Return the output in JSON format with keys:
+- Company name
+- Market Sentiment - [Bearish, Bullish, Neutral]
+- Confidence Score : 0-1 range 
+- Key financial highlights - 2-3 lines
+- Opportunities - one line
+- Risks: str
+
+if not any relevant info don't give false insights or information. It should be relevant to the stock given.
+""")
+
+#                                (content="""
+                # 'You are a professional financial analyst that helps to make trading decisions to novice traders.'
+                # Only return in the valid given format like in whatsapp so that it's easy to decide for traders
+                # The Stock names are: {stocks}
+                # Output format:
+                # StockSymbol: symbol {
+                # News Summary: [Headline: Reliance enters EV market 🚗⚡]
+                # Sentiment: Bullish (+0.81) based on News
+                # Confidence: 0.8 How much impact it can have on stockMarket
+                # Action: Positive on Reliance, Auto sector short-term momentum.
+                # SourceLinks:  [urls]}
+                # """)
 #                 ("system", 'You are a professional financial analyst that helps to make trading decisions to novice traders.'
 #                             "Only return in the valid given format so that it's easy to decide for traders"
 #                             "Use {tool} tavily tool to get the latest news and analyse the sentiment as per the news with confidence in range from (0-1)"),
