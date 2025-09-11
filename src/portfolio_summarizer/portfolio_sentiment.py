@@ -1,59 +1,61 @@
+
 import sys
 import json
 from datetime import datetime
 from typing import List, Dict, Any, Optional
-from zoneinfo import ZoneInfo
+import uuid
 
-
-from langchain_core.output_parsers import JsonOutputParser, PydanticOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.messages import HumanMessage
 from langchain_core.runnables import RunnablePassthrough
-# from langchain.chains import LLMChain
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 
-from prompts.prompt_library import PORTFOLIO_ANALYSER_PROMPT, NEWS_PROMPT
+from prompts.prompt_library import STOCKANALYZER_PROMPT
 from utils.model_loader import ModelLoader
 from utils.tool_loader import TavilySearchTool
-from src.portfolio_summarizer.schemas import PortfolioAnalysisResponse, NewsAnalysisResponse
-from utils.files_io import generate_session_id
+from src.portfolio_summarizer.schemas import PortfolioAnalysis
 
 from exceptions.custom_exception import PortfolioAnalyzerError
 from logger import GLOBAL_LOGGER as log
 
 from dotenv import load_dotenv
 
-IST = ZoneInfo("Asia/Kolkata")
+load_dotenv()
 
 
-class PortfolioAnalyzer:
+class StockAnalyzer:
     def __init__(self, session_id: Optional[str] = None):
         try:
-            load_dotenv()
-
-            self.session_id = session_id or generate_session_id()
+            self.session_id = session_id or str(uuid.uuid4())
 
             # Initialize model loader
-            self.llm = ModelLoader().load_llm()
+            self.loader = ModelLoader()
+            self.llm = self.loader.load_llm()
 
             # Load tavily search tool
-            self.search_tool = TavilySearchTool().load_tavily_tool()
+            self.tavily_search = TavilySearchTool()
+            self.search_tool = self.tavily_search.load_tavily_tool()
 
             # Prepare parsers
-            self.parser= PydanticOutputParser(pydantic_object=NewsAnalysisResponse)
+            self.parser = JsonOutputParser(pydantic_object=PortfolioAnalysis)
+            # self.fixing_parser = PydanticOutputParser.from_llm(parser=self.parser, llm=self.llm)
 
             # Bring prompt
-            self.prompt = PORTFOLIO_ANALYSER_PROMPT
+            self.prompt = STOCKANALYZER_PROMPT
 
             # Create a memory checkpointer for conversation persistence
+            self.memory = MemorySaver()
 
-            # Create agent
+            # Create agent with memory
             self.agent_executor = create_react_agent(
                 model=self.llm,
                 tools=[self.search_tool],
+                checkpointer=self.memory
             )
 
             # Thread config for memory management
+            self.thread_config = {"configurable": {"thread_id": self.session_id}}
 
             # Analysis cache for recent results
             self.analysis_cache = {}
@@ -62,11 +64,11 @@ class PortfolioAnalyzer:
             # Initialize analysis chain
             self._setup_analysis_chain()
 
-            log.info(f"PortfolioAnalyzer initialized successfully with session: {self.session_id}")
+            log.info(f"StockAnalyzer initialized successfully with session: {self.session_id}")
 
         except Exception as e:
-            log.error(f"Error initializing PortfolioAnalyzer: {e}")
-            raise PortfolioAnalyzerError("Error in PortfolioAnalyzer initialization", sys)
+            log.error(f"Error initializing StockAnalyzer")
+            raise PortfolioAnalyzerError(f"Error in StockAnalyzer initialization: {e}", sys)
 
     def _setup_analysis_chain(self):
         """Setup the analysis chain with proper error handling and memory"""
@@ -83,19 +85,19 @@ class PortfolioAnalyzer:
             log.info("Analysis chain setup completed")
 
         except Exception as e:
-            log.error(f"Error setting up analysis chain: {e}")
-            raise PortfolioAnalyzerError("Failed to setup analysis chain", sys)
+            log.error(f"Error setting up analysis chain")
+            raise PortfolioAnalyzerError(f"Failed to setup analysis chain: {e}", sys)
 
     def _format_portfolio_prompt(self, input_data: Dict[str, Any]) -> str:
         """Format the portfolio analysis prompt"""
         symbols = input_data.get('portfolio', [])
-        request_time = input_data.get('request_time', datetime.now(IST).strftime('%Y%m%d_%H%M%S'))
+        request_time = input_data.get('request_time', datetime.now().isoformat())
 
         return f"""
         Analyze the following stock portfolio: {', '.join(symbols)}
         Analysis requested at: {request_time}
 
-        Please provide comprehensive analysis in the specified format.
+        Please provide comprehensive analysis in the specified JSON format.
         Focus on recent news, market sentiment, and portfolio-level insights.
         """
 
@@ -110,6 +112,7 @@ class PortfolioAnalyzer:
             # Invoke agent with memory
             result = self.agent_executor.invoke(
                 {"messages": messages},
+                config=self.thread_config
             )
 
             return {
@@ -142,7 +145,7 @@ class PortfolioAnalyzer:
                 return parsed_json
             else:
                 # Use fixing parser as fallback
-                return self.fixing_parser.parse(response_text)
+                return self.parser.parse(response_text)
 
         except Exception as e:
             log.warning(f"Error parsing response, using fallback: {e}")
@@ -213,10 +216,10 @@ class PortfolioAnalyzer:
     def _fallback_analysis(self, symbols: List[str]) -> Dict[str, Any]:
         """Safe fallback if the LLM/chain fails"""
         log.warning("Using fallback analysis due to processing error")
-        ist = ZoneInfo("Asia/Kolkata")
+
         return {
             "portfolio_analysis": {
-                "analysis_date": datetime.now(ist).strftime('%Y%m%d_%H%M%S'),
+                "analysis_date": datetime.now().strftime("%Y-%m-%d %H:%M:%S UTC"),
                 "portfolio_stocks": symbols,
                 "overall_portfolio_sentiment": "NEUTRAL",
                 "portfolio_summary": "Analysis temporarily unavailable. Portfolio monitoring continues.",
@@ -263,7 +266,7 @@ class PortfolioAnalyzer:
             # Prepare analysis payload
             invoke_payload = {
                 "portfolio": validated_symbols,
-                "request_time": datetime.now(IST).strftime('%Y%m%d_%H%M%S'),
+                "request_time": datetime.now().isoformat(),
                 "session_id": self.session_id
             }
 
@@ -341,7 +344,7 @@ class PortfolioAnalyzer:
             "session_id": self.session_id,
             "cache_entries": len(self.analysis_cache),
             "cache_ttl_minutes": self.cache_ttl_minutes,
-            "initialized_at": datetime.now(IST).strftime('%Y%m%d_%H%M%S')
+            "initialized_at": datetime.now().isoformat()
         }
 
     def __enter__(self):
@@ -358,10 +361,10 @@ class PortfolioAnalyzer:
 
 
 # Usage example and factory function
-def create_stock_analyzer(session_id: Optional[str] = None) -> PortfolioAnalyzer:
+def create_stock_analyzer(session_id: Optional[str] = None) -> StockAnalyzer:
     """Factory function to create StockAnalyzer instance"""
     try:
-        return PortfolioAnalyzer(session_id=session_id)
+        return StockAnalyzer(session_id=session_id)
     except Exception as e:
         log.error(f"Failed to create StockAnalyzer: {e}")
         raise
@@ -374,13 +377,9 @@ if __name__ == "__main__":
         with create_stock_analyzer() as analyzer:
             symbols = ["AAPL", "GOOGL", "TSLA"]
             result = analyzer.analyze_portfolio_batch(symbols)
-            print("=========result=========")
-            print('Note: The data is in json format, view in json viewer for better visibily')
-            print(result)
-
+            print("="*25, result, "="*25)
             print(f"Analysis completed: {result.get('analysis_status')}")
             print(f"Session: {analyzer.get_session_info()}")
-            print(f"Session History: {analyzer.get_analysis_history()}")
 
     except Exception as e:
         print(f"Error: {e}")

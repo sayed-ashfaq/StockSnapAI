@@ -5,7 +5,7 @@ from datetime import datetime
 # PROMPT FOR NEWS SUMMARIZER
 
 # Search for news about all stocks
-PORTFOLIO_ANALYSER_PROMPT = [HumanMessage(content="""
+STOCKANALYZER_PROMPT = [HumanMessage(content="""
             Search for the latest news about these stocks: {portfolio} and provide a comprehensive portfolio analysis.
 
             Please provide the analysis in the following JSON format only no other things:
@@ -43,11 +43,7 @@ PORTFOLIO_ANALYSER_PROMPT = [HumanMessage(content="""
             - Everything should be in a way that is helpful to trader to analyze stocks
             """)]
 
-# NEWS PROMPT FOR THE WHAT'S APP
-FORMAT = """[Headline: Reliance enters EV market 🚗⚡]  
-            Sentiment: Bullish (+0.81)  
-            Impact: Positive on Reliance, Auto sector short-term momentum.  
-            [Action: Add to Watchlist] [Share Alert]"""
+# NEWS PROMPT FOR THE WHAT'S APp
 
 
 NEWS_PROMPT = ChatPromptTemplate.from_template("""
@@ -59,7 +55,7 @@ Context:
 
 Return the output in JSON format with keys:
 - stock_symbol : ticker
-- sentiment - [Strong Bearish,Bearish, Bullish, Neutral, Strong Bullish]
+- sentiment - [STRONG NEGATIVE,NEGATIVE, POSITIVE, NEUTRAL, STRONG POSITIVE]
 - confidence : 0-1 range 
 - news_summary - 2-3 lines in list
 - Opportunities - one line

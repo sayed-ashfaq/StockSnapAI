@@ -6,8 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_news_api.ipynb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/whatsapp_news.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/whatsapp_news.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prompts/prompt_library.py" beforeDir="false" afterPath="$PROJECT_DIR$/prompts/prompt_library.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/portfolio_sentiment.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/portfolio_summarizer/schemas.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,44 +41,44 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;Python tests.Python tests for test_document_service.test_process_image.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_portfolio_analyser.test_analyze_portfolio_batch_basic.executor&quot;: &quot;Run&quot;,
-    &quot;Python tests.Python tests for test_portfolio_analyser.test_cache_usage.executor&quot;: &quot;Run&quot;,
-    &quot;Python.RAG_DOC_CHAT.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config.executor&quot;: &quot;Run&quot;,
-    &quot;Python.config_loader (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.config_loader.executor&quot;: &quot;Run&quot;,
-    &quot;Python.custom_exception.executor&quot;: &quot;Run&quot;,
-    &quot;Python.custom_logging (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.custom_logging.executor&quot;: &quot;Run&quot;,
-    &quot;Python.data_ingestion.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.model_loader (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.model_loader.executor&quot;: &quot;Run&quot;,
-    &quot;Python.news.executor&quot;: &quot;Run&quot;,
-    &quot;Python.news_ingestion.executor&quot;: &quot;Run&quot;,
-    &quot;Python.news_n_sentiment.executor&quot;: &quot;Run&quot;,
-    &quot;Python.portfolio_sentiment.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.stock_price.executor&quot;: &quot;Run&quot;,
-    &quot;Python.streamlit_UI (1).executor&quot;: &quot;Run&quot;,
-    &quot;Python.streamlit_UI.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_news_service.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test_tavily_news.executor&quot;: &quot;Run&quot;,
-    &quot;Python.tools.executor&quot;: &quot;Run&quot;,
-    &quot;Python.versions.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/302sy/Desktop/Generative AI/StockSnapAI&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "Python tests.Python tests for test_document_service.test_process_image.executor": "Run",
+    "Python tests.Python tests for test_portfolio_analyser.test_analyze_portfolio_batch_basic.executor": "Run",
+    "Python tests.Python tests for test_portfolio_analyser.test_cache_usage.executor": "Run",
+    "Python.RAG_DOC_CHAT.executor": "Run",
+    "Python.config.executor": "Run",
+    "Python.config_loader (1).executor": "Run",
+    "Python.config_loader.executor": "Run",
+    "Python.custom_exception.executor": "Run",
+    "Python.custom_logging (1).executor": "Run",
+    "Python.custom_logging.executor": "Run",
+    "Python.data_ingestion.executor": "Run",
+    "Python.main (1).executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.model_loader (1).executor": "Run",
+    "Python.model_loader.executor": "Run",
+    "Python.news.executor": "Run",
+    "Python.news_ingestion.executor": "Run",
+    "Python.news_n_sentiment.executor": "Run",
+    "Python.portfolio_sentiment.executor": "Run",
+    "Python.stock_price.executor": "Run",
+    "Python.streamlit_UI (1).executor": "Run",
+    "Python.streamlit_UI.executor": "Run",
+    "Python.test.executor": "Run",
+    "Python.test_news_service.executor": "Run",
+    "Python.test_tavily_news.executor": "Run",
+    "Python.tools.executor": "Run",
+    "Python.versions.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/302sy/Desktop/Generative AI/StockSnapAI",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI\templates" />
