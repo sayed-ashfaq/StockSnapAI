@@ -4,6 +4,9 @@ import uuid
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from typing import Iterable, List, Tuple
+
+from fastapi import UploadFile
+
 from logger import GLOBAL_LOGGER as log
 from src.rag_system.schemas import FileType
 from exceptions.custom_exception import DocumentPortalException
@@ -77,3 +80,21 @@ def save_uploaded_files(uploaded_files: Iterable, target_dir: Path) -> List[Path
     except Exception as e:
         log.error("Failed to save uploaded files", error=str(e), dir=str(target_dir))
         raise DocumentPortalException("Failed to save uploaded files", e) from e
+
+
+# ---------- Helpers ----------
+class FastAPIFileAdapter:
+    """Adapt FastAPI UploadFile -> .name + .getbuffer() API"""
+    def __init__(self, uf: UploadFile):
+        self._uf = uf
+        self.name = uf.filename
+    def getbuffer(self) -> bytes:
+        self._uf.file.seek(0)
+        return self._uf.file.read()
+
+def read_pdf_via_handler(handler, path: str) -> str:
+    if hasattr(handler, "read_pdf"):
+        return handler.read_pdf(path)  # type: ignore
+    if hasattr(handler, "read_"):
+        return handler.read_(path)  # type: ignore
+    raise RuntimeError("DocHandler has neither read_pdf nor read_ method.")
