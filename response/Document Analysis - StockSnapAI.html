@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<!-- saved from url=(0049)http://127.0.0.1:8001/dashboard/document-analysis -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document Analysis - StockSnapAI</title>
+        <link rel="stylesheet" href="./Document Analysis - StockSnapAI_files/chat_with_reports.css">
+    </head>
+    <body>
+        <header class="header">
+            <div class="container">
+                <nav class="nav">
+                    <a href="http://127.0.0.1:8001/" class="logo">StockSnapAI</a>
+                    <div class="nav-buttons">
+                        <a href="http://127.0.0.1:8001/dashboard" class="btn btn-secondary">Dashboard</a>
+                        <a href="http://127.0.0.1:8001/dashboard/sentiment-analysis" class="btn btn-secondary">📈 Sentiment Analysis</a>
+                        <a href="http://127.0.0.1:8001/dashboard/document-analysis" class="btn btn-primary"> 📄 Document Analysis</a>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="main-content">
+                <!-- Left Panel - Document Upload -->
+                <div class="left-panel">
+                    <div class="upload-section">
+                        <div class="section-header">📄 Document Chat &amp; Analysis</div>
+                        <div class="section-description">
+                            Upload financial documents any type and chat with them using AI. Get summaries, ask questions, and detect red flags.
+                        </div>
+
+                        <div class="upload-area" onclick="document.getElementById(&#39;fileInput&#39;).click()" ondrop="handleDrop(event)" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                            <div class="upload-icon">☁️</div>
+                            <div class="upload-text">Drag and drop file here</div>
+                            <div class="upload-subtext">Limit 200MB per file • AnyType</div>
+                            <button class="browse-btn">Browse files</button>
+                        </div>
+
+                        <input type="file" id="fileInput" class="file-input" accept=".pdf,.txt,.doc,.docx,.png,.jpg,.jpeg" multiple="" onchange="handleFileSelect(event)">
+
+                        <div class="supported-formats">
+                            <div class="formats-title">Supported document types:</div>
+                            <div class="format-list">
+                                <span class="format-tag">📄 Earnings Reports: Quarterly/Annual earnings releases</span>
+                                <span class="format-tag">📊 Annual Reports: 10-K annual company reports</span>
+                                <span class="format-tag">🔍 Audit Reports: Independent auditor reports</span>
+                                <span class="format-tag">📈 Earnings Transcripts: Earnings call transcripts</span>
+                                <span class="format-tag">📋 Financial Statements: Balance sheets, Income statements</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uploaded-files" id="uploadedFiles">
+                        <div class="section-header">📁 Uploaded Documents</div>
+                        <div id="filesList">
+        <div class="file-item">
+            <div class="file-info">
+                <div class="file-icon">✅</div>
+                <div class="file-details">
+                    <div class="file-name">testing_annual_report.pdf</div>
+                    <div class="file-size">3.98 MB</div>
+                    <div class="file-status">Ready for chat</div>
+                    
+                </div>
+            </div>
+            <div class="file-actions">
+                <button class="action-btn remove-btn" onclick="removeFile(1757675177831.6602)" title="Remove">❌</button>
+            </div>
+        </div>
+    </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Chat Interface -->
+                <div class="right-panel">
+                    <div class="chat-container">
+                        <div class="chat-header">
+                            <div class="section-header">💬 Chat with Document</div>
+
+                            <div class="document-summary" id="documentSummary" style="display: block;">
+                                <div class="summary-title">📊 Document Summary</div>
+                                <div class="summary-content" id="summaryText">### Summary of Shri Ahimsa Naturals Limited Annual Report 2024-2025
+
+#### 1. Document Type &amp; Overview
+The document is an official notice and annual report for the fiscal year 2024-2025 from Shri Ahimsa Naturals Limited (formerly known as Shri Ahimsa Mines and Minerals Limited). Its main purpose is to inform shareholders about the upcoming 35th Annual General Meeting (AGM), which is set for September 30, 2025, while providing insights into the company's operations, financial performance, and strategic directions for the year ahead.
+
+#### 2. Key Financial Highlights
+- Shri Ahimsa Naturals is recognized as one of the largest global manufacturers of Natural Caffeine, with exports reaching over 14 countries.
+- With 30+ years of R&amp;D capabilities, the company stands as the lowest-cost producer of Natural Caffeine and Green Coffee Extracts (GCE) worldwide.
+- The company's focus on sustainability and innovation positions it as a leader in transforming waste into valuable products for various industries, including food &amp; beverage, nutraceuticals, cosmetics, and pharmaceuticals.
+
+#### 3. Key Points
+- The AGM will commence on September 30, 2025, and e-voting for shareholders will begin on September 27 and end on September 29, 2025.
+- The company emphasizes its commitment to environmentally sustainable practices, as evidenced by its initiatives to create value from waste through proprietary extraction processes.
+- Key product offerings include Caffeine Anhydrous Natural and various herbal extracts, approved by international institutions for quality.
+
+#### 4. Red Flags &amp; Concerns
+- The reliance on natural raw materials may expose the company to supply chain volatility and fluctuations in raw material prices, though specific metrics on price changes are not provided in this document.
+- There is no mention of financial performance metrics (i.e., revenue growth, profit margins, etc.) within the summary, which might raise questions regarding the financial stability or profitability of the company.
+
+#### 5. Future Outlook
+- Shri Ahimsa Naturals looks to continue its trajectory of growth and innovation by enhancing its extraction technologies and expanding its product line.
+- The focus on R&amp;D will likely drive forward new product development and sustainability initiatives, positioning the company well within the expanding global nutraceutical and beverage markets.
+- The upcoming AGM will potentially outline further strategic goals and initiatives aimed at bolstering market presence and shareholder value.
+
+This comprehensive summary highlights the company's focus on sustainability and innovation while indicating potential areas of concern regarding financial transparency. The future outlook remains optimistic, albeit contingent on effective management of raw material vulnerabilities and strategic expansion efforts.</div>
+                                <div class="key-highlights">
+                                    <strong>Key Financial Highlights:</strong>
+                                    <ul class="highlights-list" id="highlightsList"><li>Document processed successfully with 513 text chunks</li><li>Annual report detected - Financial statements and performance metrics available</li><li>Strategic information and business outlook included</li><li>Regulatory compliance and risk factors documented</li><li>Ready for detailed Q&amp;A and financial analysis</li></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="empty-chat" id="emptyChat" style="display: none;">
+                                <div class="empty-chat-icon">💬</div>
+                                <h3>Ready to Chat</h3>
+                                <p>Upload a financial document to start chatting with AI. Get summaries, ask questions, and detect red flags.</p>
+                            </div>
+                        <div class="message ai">
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+            <div class="message-text">I've analyzed "testing_annual_report.pdf". You can now ask me questions about this document. What would you like to know?</div>
+            <div class="message-time">04:36 PM</div>
+        </div>
+    </div></div>
+
+                        <div class="chat-input-container">
+                            <div class="chat-input-wrapper">
+                                <textarea class="chat-input" id="chatInput" placeholder="Ask a question about the document..." rows="1"></textarea>
+                                <button class="send-btn" id="sendBtn" onclick="sendMessage()">Send</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            let uploadedFiles = [];
+            let chatHistory = [];
+            let isProcessing = false;
+            let currentDocumentId = null;
+
+            const API_BASE_URL = '/dashboard/document-analysis'; // Since we're on the same domain
+
+            function handleDragOver(event) {
+                event.preventDefault();
+                event.currentTarget.classList.add('dragover');
+            }
+
+            function handleDragLeave(event) {
+                event.currentTarget.classList.remove('dragover');
+            }
+
+            function handleDrop(event) {
+                event.preventDefault();
+                event.currentTarget.classList.remove('dragover');
+                const files = Array.from(event.dataTransfer.files);
+                processFiles(files);
+            }
+
+            function handleFileSelect(event) {
+                const files = Array.from(event.target.files);
+                processFiles(files);
+            }
+
+            async function processFiles(files) {
+                for (const file of files) {
+                    if (file.size > 200 * 1024 * 1024) {
+                        alert(`File ${file.name} is too large. Maximum size is 200MB.`);
+                        continue;
+                    }
+
+            const fileObj = {
+                id: Date.now() + Math.random(),
+                name: file.name,
+                size: formatFileSize(file.size),
+                type: file.type,
+                file: file,
+                status: 'uploading'
+            };
+
+        uploadedFiles.push(fileObj);
+        updateFilesList();
+
+        try {
+            // Upload document to backend
+            await uploadDocument(fileObj);
+        } catch (error) {
+            console.error('Error uploading file:', error);
+            fileObj.status = 'error';
+            updateFilesList();
+        }
+    }
+}
+
+async function uploadDocument(fileObj) {
+    try {
+        const formData = new FormData();
+        formData.append('file', fileObj.file);
+
+        // Show uploading status
+        fileObj.status = 'uploading';
+        updateFilesList();
+
+        const response = await fetch('/dashboard/document-analysis', {
+            method: 'POST',
+            body: formData,
+            credentials: 'include' // Include cookies for session
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Upload failed');
+        }
+
+        const result = await response.json();
+        console.log(result);
+        alert(result.message);
+
+        if (result.success) {
+            // Update file object with response data
+            fileObj.document_id = result.document_id;
+            fileObj.status = 'completed';
+            fileObj.summary = result.summary;
+            fileObj.highlights = result.highlights;
+            fileObj.metadata = result.metadata;
+
+            // Set as current document
+            currentDocumentId = result.document_id;
+
+            // Show document summary
+            showDocumentSummary(result);
+
+            // Enable chat
+            enableChat();
+
+            // Add initial AI message
+            addMessage('ai', `I've analyzed "${fileObj.name}". You can now ask me questions about this document. What would you like to know?`);
+
+            updateFilesList();
+        } else {
+            throw new Error('Upload failed: ' + (result.message || 'Unknown error'));
+        }
+    } catch (error) {
+        console.error('Upload error:', error);
+        fileObj.status = 'error';
+        fileObj.error = error.message;
+        updateFilesList();
+        alert('Error uploading file: ' + error.message);
+    }
+}
+
+function showDocumentSummary(result) {
+    const summaryElement = document.getElementById('documentSummary');
+    const summaryText = document.getElementById('summaryText');
+    const highlightsList = document.getElementById('highlightsList');
+
+    // Set summary text
+    summaryText.textContent = result.summary;
+
+    // Set highlights
+    highlightsList.innerHTML = result.highlights.map(highlight => `<li>${highlight}</li>`).join('');
+
+    // Show the summary section
+    summaryElement.style.display = 'block';
+}
+
+function enableChat() {
+    document.getElementById('chatInput').disabled = false;
+    document.getElementById('sendBtn').disabled = false;
+    document.getElementById('emptyChat').style.display = 'none';
+}
+
+function disableChat() {
+    document.getElementById('chatInput').disabled = true;
+    document.getElementById('sendBtn').disabled = true;
+    document.getElementById('documentSummary').style.display = 'none';
+}
+
+function updateFilesList() {
+    const filesList = document.getElementById('filesList');
+
+    if (uploadedFiles.length === 0) {
+        filesList.innerHTML = `
+            <div style="text-align: center; color: #666; padding: 20px; font-style: italic;">
+                No documents uploaded yet
+            </div>
+        `;
+        return;
+    }
+
+    filesList.innerHTML = uploadedFiles.map(file => `
+        <div class="file-item">
+            <div class="file-info">
+                <div class="file-icon">${getFileIcon(file.status)}</div>
+                <div class="file-details">
+                    <div class="file-name">${file.name}</div>
+                    <div class="file-size">${file.size}</div>
+                    <div class="file-status">${getStatusText(file.status)}</div>
+                    ${file.error ? `<div class="file-error" style="color: red; font-size: 12px;">${file.error}</div>` : ''}
+                </div>
+            </div>
+            <div class="file-actions">
+                <button class="action-btn remove-btn" onclick="removeFile(${file.id})" title="Remove">❌</button>
+            </div>
+        </div>
+    `).join('');
+}
+
+function getFileIcon(status) {
+    switch (status) {
+        case 'uploading': return '⏳';
+        case 'completed': return '✅';
+        case 'error': return '❌';
+        default: return '📄';
+    }
+}
+
+function getStatusText(status) {
+    switch (status) {
+        case 'uploading': return 'Processing...';
+        case 'completed': return 'Ready for chat';
+        case 'error': return 'Upload failed';
+        default: return 'Waiting...';
+    }
+}
+
+async function removeFile(fileId) {
+    const fileIndex = uploadedFiles.findIndex(file => file.id === fileId);
+    if (fileIndex === -1) return;
+
+    const file = uploadedFiles[fileIndex];
+
+    // If file was successfully uploaded, delete it from backend
+    if (file.document_id && file.status === 'completed') {
+        try {
+            const response = await fetch(`${API_BASE_URL}/${file.document_id}`, {
+                method: 'DELETE',
+                credentials: 'include'
+            });
+
+            if (!response.ok) {
+                console.error('Failed to delete document from backend');
+            }
+        } catch (error) {
+            console.error('Error deleting document:', error);
+        }
+    }
+
+    // Remove from local array
+    uploadedFiles.splice(fileIndex, 1);
+    updateFilesList();
+
+    // If this was the current document, reset chat state
+    if (file.document_id === currentDocumentId) {
+        resetChatState();
+    }
+}
+
+function resetChatState() {
+    currentDocumentId = null;
+    disableChat();
+    document.getElementById('chatMessages').innerHTML = `
+        <div class="empty-chat" id="emptyChat">
+            <div class="empty-chat-icon">💬</div>
+            <h3>Ready to Chat</h3>
+            <p>Upload a financial document to start chatting with AI. Get summaries, ask questions, and detect red flags.</p>
+        </div>
+    `;
+    chatHistory = [];
+}
+
+function formatFileSize(bytes) {
+    if (bytes === 0) return '0 Bytes';
+    const k = 1024;
+    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+async function sendMessage() {
+    if (isProcessing || !currentDocumentId) return;
+
+    const input = document.getElementById('chatInput');
+    const message = input.value.trim();
+
+    if (!message) return;
+
+    addMessage('user', message);
+    input.value = '';
+    input.style.height = '44px';
+
+    isProcessing = true;
+    document.getElementById('sendBtn').disabled = true;
+
+    // Show typing indicator
+    showTypingIndicator();
+
+    try {
+        const formData = new FormData();
+        formData.append('document_id', currentDocumentId);
+        formData.append('message', message);
+        formData.append('chat_history', JSON.stringify(chatHistory));
+
+        const response = await fetch(`${API_BASE_URL}/chat`, {
+            method: 'POST',
+            body: formData,
+            credentials: 'include'
+        });
+
+        hideTypingIndicator();
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.detail || 'Chat failed');
+        }
+
+        const result = await response.json();
+
+        if (result.success) {
+            addMessage('ai', result.response);
+            chatHistory = result.chat_history || chatHistory;
+        } else {
+            throw new Error('Chat failed: ' + (result.message || 'Unknown error'));
+        }
+
+    } catch (error) {
+        console.error('Chat error:', error);
+        hideTypingIndicator();
+        addMessage('ai', 'Sorry, I encountered an error processing your message. Please try again.');
+    } finally {
+        isProcessing = false;
+        document.getElementById('sendBtn').disabled = false;
+    }
+}
+
+function addMessage(sender, text) {
+    const messagesContainer = document.getElementById('chatMessages');
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+    const messageElement = document.createElement('div');
+    messageElement.className = `message ${sender}`;
+    messageElement.innerHTML = `
+        <div class="message-avatar">${sender === 'user' ? '👤' : '🤖'}</div>
+        <div class="message-content">
+            <div class="message-text">${text}</div>
+            <div class="message-time">${time}</div>
+        </div>
+    `;
+
+    messagesContainer.appendChild(messageElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    // Update chat history for tracking
+    if (sender === 'user' || sender === 'ai') {
+        chatHistory.push({
+            role: sender === 'user' ? 'user' : 'assistant',
+            content: text,
+            time
+        });
+    }
+}
+
+function showTypingIndicator() {
+    const messagesContainer = document.getElementById('chatMessages');
+    const typingElement = document.createElement('div');
+    typingElement.id = 'typingIndicator';
+    typingElement.className = 'message ai';
+    typingElement.innerHTML = `
+        <div class="message-avatar">🤖</div>
+        <div class="message-content">
+            <div class="typing-indicator">
+                AI is thinking
+                <div class="typing-dots">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    messagesContainer.appendChild(typingElement);
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function hideTypingIndicator() {
+    const typingElement = document.getElementById('typingIndicator');
+    if (typingElement) {
+        typingElement.remove();
+    }
+}
+
+// Auto-resize textarea
+document.getElementById('chatInput').addEventListener('input', function() {
+    this.style.height = '44px';
+    this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+});
+
+// Send message on Enter (but allow Shift+Enter for new lines)
+document.getElementById('chatInput').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+    }
+});
+
+// Initialize
+updateFilesList();
+            </script>
+
+</body></html>
