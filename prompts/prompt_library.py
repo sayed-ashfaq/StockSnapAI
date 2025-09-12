@@ -5,7 +5,7 @@ from datetime import datetime
 # PROMPT FOR NEWS SUMMARIZER
 
 # Search for news about all stocks
-STOCKANALYZER_PROMPT = [HumanMessage(content="""
+STOCK_ANALYZER_PROMPT = [HumanMessage(content="""
             Search for the latest news about these stocks: {portfolio} and provide a comprehensive portfolio analysis.
 
             Please provide the analysis in the following JSON format only no other things:

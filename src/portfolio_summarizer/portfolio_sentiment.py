@@ -11,7 +11,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langgraph.prebuilt import create_react_agent
 from langgraph.checkpoint.memory import MemorySaver
 
-from prompts.prompt_library import STOCKANALYZER_PROMPT
+from prompts.prompt_library import STOCK_ANALYZER_PROMPT
 from utils.model_loader import ModelLoader
 from utils.tool_loader import TavilySearchTool
 from src.portfolio_summarizer.schemas import PortfolioAnalysis
@@ -42,7 +42,7 @@ class StockAnalyzer:
             # self.fixing_parser = PydanticOutputParser.from_llm(parser=self.parser, llm=self.llm)
 
             # Bring prompt
-            self.prompt = STOCKANALYZER_PROMPT
+            self.prompt = STOCK_ANALYZER_PROMPT
 
             # Create a memory checkpointer for conversation persistence
             self.memory = MemorySaver()

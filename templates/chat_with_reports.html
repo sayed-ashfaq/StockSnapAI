@@ -107,49 +107,48 @@
 
         <script>
             let uploadedFiles = [];
-let chatHistory = [];
-let isProcessing = false;
-let currentDocumentId = null;
+            let chatHistory = [];
+            let isProcessing = false;
+            let currentDocumentId = null;
 
-// API Base URL - adjust this to match your FastAPI server
-const API_BASE_URL = '/dashboard/document-analysis'; // Since we're on the same domain
+            const API_BASE_URL = '/dashboard/document-analysis'; // Since we're on the same domain
 
-function handleDragOver(event) {
-    event.preventDefault();
-    event.currentTarget.classList.add('dragover');
-}
+            function handleDragOver(event) {
+                event.preventDefault();
+                event.currentTarget.classList.add('dragover');
+            }
 
-function handleDragLeave(event) {
-    event.currentTarget.classList.remove('dragover');
-}
+            function handleDragLeave(event) {
+                event.currentTarget.classList.remove('dragover');
+            }
 
-function handleDrop(event) {
-    event.preventDefault();
-    event.currentTarget.classList.remove('dragover');
-    const files = Array.from(event.dataTransfer.files);
-    processFiles(files);
-}
+            function handleDrop(event) {
+                event.preventDefault();
+                event.currentTarget.classList.remove('dragover');
+                const files = Array.from(event.dataTransfer.files);
+                processFiles(files);
+            }
 
-function handleFileSelect(event) {
-    const files = Array.from(event.target.files);
-    processFiles(files);
-}
+            function handleFileSelect(event) {
+                const files = Array.from(event.target.files);
+                processFiles(files);
+            }
 
-async function processFiles(files) {
-    for (const file of files) {
-        if (file.size > 200 * 1024 * 1024) {
-            alert(`File ${file.name} is too large. Maximum size is 200MB.`);
-            continue;
-        }
+            async function processFiles(files) {
+                for (const file of files) {
+                    if (file.size > 200 * 1024 * 1024) {
+                        alert(`File ${file.name} is too large. Maximum size is 200MB.`);
+                        continue;
+                    }
 
-        const fileObj = {
-            id: Date.now() + Math.random(),
-            name: file.name,
-            size: formatFileSize(file.size),
-            type: file.type,
-            file: file,
-            status: 'uploading'
-        };
+            const fileObj = {
+                id: Date.now() + Math.random(),
+                name: file.name,
+                size: formatFileSize(file.size),
+                type: file.type,
+                file: file,
+                status: 'uploading'
+            };
 
         uploadedFiles.push(fileObj);
         updateFilesList();
@@ -186,6 +185,8 @@ async function uploadDocument(fileObj) {
         }
 
         const result = await response.json();
+        console.log(result);
+        alert(result.message);
 
         if (result.success) {
             // Update file object with response data
