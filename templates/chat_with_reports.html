@@ -173,7 +173,7 @@ async function uploadDocument(fileObj) {
         fileObj.status = 'uploading';
         updateFilesList();
 
-        const response = await fetch(`${API_BASE_URL}/upload`, {
+        const response = await fetch('/dashboard/document-analysis', {
             method: 'POST',
             body: formData,
             credentials: 'include' // Include cookies for session
