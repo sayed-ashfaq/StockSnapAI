@@ -61,17 +61,18 @@ class PortfolioRequest(BaseModel):
 class IndividualStockAnalysis(BaseModel):
     stock_symbol: str
     sentiment: SentimentEnum
-    quick_summary: str = Field(..., min_length=10, max_length=500)
+    quick_summary: List[str] = Field(..., min_length=10, max_length=500)
     key_news_category: CategoryEnum
     price_impact: PriceImpactEnum
-    confidence_score: Optional[float] = Field(None, ge=0.0, le=1.0)
+    source_links: List[str]
+    confidence_score: float = Field(None, ge=0.0, le=1.0)
 
 
 class PortfolioAnalysis(BaseModel):
     analysis_date: datetime
     portfolio_stocks: List[str]
     overall_portfolio_sentiment: SentimentEnum
-    portfolio_summary: str = Field(..., min_length=20, max_length=1000)
+    portfolio_summary: List[str] = Field(..., min_length=20, max_length=1000)
     market_themes: List[str] = Field(..., max_items=5)
     portfolio_risks: List[str] = Field(..., max_items=5)
     portfolio_opportunities: List[str] = Field(..., max_items=5)
