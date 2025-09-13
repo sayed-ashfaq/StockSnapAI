@@ -4,7 +4,6 @@ langchain-openai
 langchain-google-genai
 langchain-groq
 langchain-tavily
-tavily
 langchain-community
 langchain-core
 langgraph
