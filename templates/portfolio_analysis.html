@@ -12,9 +12,9 @@
             <nav class="nav">
                 <a href="/" class="logo">StockSnapAI</a>
                 <div class="nav-buttons">
-                    <a href="/dashboard" class="btn btn-secondary">Dashboard</a>
-                    <a href="/dashboard/sentiment-analysis" class="btn btn-primary">📈 Sentiment Analysis</a>
-                    <a href="/dashboard/document-analysis" class="btn btn-secondary">📄 Document Analysis</a>
+                    <a href="/" class="btn btn-secondary">Dashboard</a>
+                    <a href="/sentiment-analysis" class="btn btn-primary">📈 Sentiment Analysis</a>
+                    <a href="/document-analysis" class="btn btn-secondary">📄 Document Analysis</a>
                 </div>
             </nav>
         </div>
@@ -156,7 +156,7 @@
             showLoading();
 
             try {
-                const response = await fetch('/dashboard/sentiment-analysis', {
+                const response = await fetch('/sentiment-analysis', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
