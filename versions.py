@@ -1,23 +1,40 @@
 import importlib.metadata
 
-packages= [
-    "streamlit",
-    "langchain",
-    "langchain-openai",
-    "langchain-google-genai",
-    "langchain-groq",
-    "langchain-tavily",
-    "langchain-community",
-    "langgraph",
+packages = [
     "python-dotenv",
-    "pandas",
+    "python-multipart",
     "pypdf",
-    "faiss-cpu",
-    "structlog",
     "chardet",
     "charset-normalizer",
-    "fastapi"
+    "anthropic",
+    "fastapi",
+    "langchain",
+    "langchain_chroma",
+    "langchain_community",
+    "langchain_core",
+    "langchain_google_genai",
+    "langchain_groq",
+    "langchain_openai",
+    "langchain_tavily",
+    "langchain_text_splitters",
+    "langgraph",
+    "pandas",
+    "Pillow",
+    "pydantic",
+    "pydantic_settings",
+    "pymupdf",
+    "PyPDF2",
+    "pytest",
+    "python_docx",
+    "PyYAML",
+    "Requests",
+    "setuptools",
+    "streamlit",
+    "structlog",
+    "supabase",
+    "uvicorn"
 ]
+
 
 for package in packages:
     try:
