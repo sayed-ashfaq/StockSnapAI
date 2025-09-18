@@ -12,9 +12,9 @@
                 <nav class="nav">
                     <a href="/" class="logo">StockSnapAI</a>
                     <div class="nav-buttons">
-                        <a href="/dashboard" class="btn btn-secondary">Dashboard</a>
-                        <a href="/dashboard/sentiment-analysis" class="btn btn-secondary">📈 Sentiment Analysis</a>
-                        <a href=" /dashboard/document-analysis" class="btn btn-primary"> 📄 Document Analysis</a>
+                        <a href="/" class="btn btn-secondary">Dashboard</a>
+                        <a href="/sentiment-analysis" class="btn btn-secondary">📈 Sentiment Analysis</a>
+                        <a href=" /document-analysis" class="btn btn-primary"> 📄 Document Analysis</a>
                     </div>
                 </nav>
             </div>
@@ -112,7 +112,7 @@
             let isProcessing = false;
             let currentDocumentId = null;
 
-            const API_BASE_URL = '/dashboard/document-analysis'; // Since we're on the same domain
+            const API_BASE_URL = '/document-analysis'; // Since we're on the same domain
 
             function handleDragOver(event) {
                 event.preventDefault();
@@ -174,7 +174,7 @@ async function uploadDocument(fileObj) {
         fileObj.status = 'uploading';
         updateFilesList();
 
-        const response = await fetch('/dashboard/document-analysis', {
+        const response = await fetch('/document-analysis', {
             method: 'POST',
             body: formData,
             credentials: 'include' // Include cookies for session
