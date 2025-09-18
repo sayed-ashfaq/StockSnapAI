@@ -35,19 +35,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/dashboard", response_class=HTMLResponse)
+@app.get("/", response_class=HTMLResponse)
 async def serve_ui(request: Request):
     logger.info("Serving UI homepage.")
     resp = templates.TemplateResponse("dashboard_v2.html", {"request": request})
     resp.headers["Cache-Control"] = "no-store"
     return resp
-@app.get("/dashboard/sentiment-analysis", response_class=HTMLResponse)
+@app.get("/sentiment-analysis", response_class=HTMLResponse)
 async def portfolio_analysis_page(request: Request):
     logger.info("Serving UI portfolio analysis homepage.")
     resp = templates.TemplateResponse("portfolio_analysis.html", {"request": request})
     resp.headers["Cache-Control"] = "no-store"
     return resp
-@app.get("/dashboard/document-analysis", response_class=HTMLResponse)
+@app.get("/document-analysis", response_class=HTMLResponse)
 async def document_analysis_page(request: Request):
     logger.info("Serving UI document analysis homepage.")
     resp = templates.TemplateResponse("chat_with_reports.html", {"request": request})
@@ -62,7 +62,7 @@ def health():
 
 #=============Portfolio Analyzer========================#
 
-@app.post("/dashboard/sentiment-analysis", response_class=HTMLResponse)
+@app.post("/sentiment-analysis", response_class=HTMLResponse)
 async def sentiment_analysis_page(portfolio: List[str]):
     portfolio_analyzer = StockAnalyzer()
     logger.info("Running portfolio analysis on given stocks...")
@@ -74,7 +74,7 @@ async def sentiment_analysis_page(portfolio: List[str]):
 processed_documents= {}
 
 # get the uploaded file
-@app.post("/dashboard/document-analysis")
+@app.post("/document-analysis")
 async def upload_document(file: UploadFile = File(...)) -> Any:
     logger.info("Received upload file for chat with report: {}".format(file.filename))
 
