@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="" />
+    <list default="true" id="f50afe4a-af28-41b9-b3ad-3626f3fea857" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/notebooks/testing_chat_engine.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/notebooks/testing_chat_engine.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/chat_with_reports.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/chat_with_reports.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/dashboard_v2.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/dashboard_v2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/portfolio_analysis.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/portfolio_analysis.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -83,7 +91,7 @@
       <recent name="C:\Users\302sy\Desktop\Generative AI\StockSnapAI" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.portfolio_sentiment">
+  <component name="RunManager">
     <configuration name="portfolio_sentiment" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="StockSnapAI" />
       <option name="ENV_FILES" value="" />
