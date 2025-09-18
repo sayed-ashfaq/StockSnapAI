@@ -1,3 +1,8 @@
+python-dotenv==1.1.1
+python-multipart==0.0.20
+pypdf==6.0.0
+chardet==5.2.0
+charset-normalizer==3.3.2
 anthropic==0.67.0
 fastapi==0.116.1
 langchain==0.3.27
@@ -10,7 +15,6 @@ langchain_openai==0.3.33
 langchain_tavily==0.2.11
 langchain_text_splitters==0.3.11
 langgraph==0.6.7
-openai==1.107.2
 pandas==2.3.2
 Pillow==11.3.0
 pydantic==2.11.9
