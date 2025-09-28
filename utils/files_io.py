@@ -3,7 +3,7 @@ import re
 import uuid
 from datetime import datetime
 from zoneinfo import ZoneInfo
-from typing import Iterable, List, Tuple
+from typing import Iterable, List, Tuple, Any
 
 from fastapi import UploadFile
 
@@ -53,7 +53,7 @@ def format_file_size(size_bytes: int) -> str:
 def generate_session_id(prefix: str = "session") -> str:
     return f"{prefix}_{datetime.now(IST).strftime('%Y%m%d%H%M%S')}_{uuid.uuid4().hex[:8]}"
 
-def save_uploaded_files(uploaded_files: Iterable, target_dir: Path) -> List[Path]:
+def save_uploaded_files(uploaded_files: Any, target_dir: Path) -> List[Path]:
     """Save uploaded files (Streamlit-like) and return local paths."""
     try:
         target_dir.mkdir(parents=True, exist_ok=True)
@@ -65,8 +65,7 @@ def save_uploaded_files(uploaded_files: Iterable, target_dir: Path) -> List[Path
                 log.warning("Unsupported file skipped", filename=name)
                 continue
             # Clean file name (only alphanum, dash, underscore)
-            safe_name = re.sub(r'[^a-zA-Z0-9_\-]', '_', Path(name).stem).lower()
-            fname = f"{safe_name}_{uuid.uuid4().hex[:6]}{ext}"
+
             fname = f"{uuid.uuid4().hex[:8]}{ext}"
             out = target_dir / fname
             with open(out, "wb") as f:
