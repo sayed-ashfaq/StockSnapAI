@@ -1,7 +1,9 @@
+import json
 import os
 import tempfile
+import uuid
 from datetime import datetime
-from typing import List, Any
+from typing import List, Any, Optional
 
 from fastapi import FastAPI, HTTPException, UploadFile, File, Form, Request
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,7 +11,6 @@ from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pathlib import Path
-
 
 from src.portfolio_summarizer.portfolio_sentiment import StockAnalyzer
 from src.rag_system.document_service import DocumentService
@@ -19,7 +20,7 @@ from logger import GLOBAL_LOGGER as logger
 from utils.document_ops import FastAPIFileAdapter
 from utils.files_io import save_uploaded_files, get_file_type, generate_document_id
 
-UPLOAD_BASE = os.getenv("UPLOAD_BASE", "data")
+UPLOAD_BASE = Path(os.getenv("UPLOAD_BASE", "data"))
 
 app= FastAPI(title= "Stock Snap AI",version= "1.0",)
 
@@ -34,6 +35,28 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+active_sessions = {}
+def create_session_if_not_exists(request: Request, response: JSONResponse) -> str:
+    """Check for session_id cookie, if not set -> create new one"""
+    session_id = request.cookies.get("session_id")
+    if not session_id:
+        session_id = str(uuid.uuid4())
+        response.set_cookie(
+            key="session_id",
+            value=session_id,
+            httponly=True,
+            max_age=60 * 60 * 24,  # 1 day
+            path="/"
+        )
+        logger.info(f"Created new session: {session_id}")
+    if session_id not in active_sessions:
+        active_sessions[session_id] = {"id": session_id, "created_at": datetime.now()}
+    return session_id
+
+document_service = DocumentService()
+vector_service = VectorService()
+chat_service = ChatService(vector_service)
 
 @app.get("/", response_class=HTMLResponse)
 async def serve_ui(request: Request):
@@ -75,13 +98,9 @@ processed_documents= {}
 
 # get the uploaded file
 @app.post("/document-analysis")
-async def upload_document(file: UploadFile = File(...)) -> Any:
+async def upload_document(request: Request, file: UploadFile = File(...)) -> Any:
     logger.info("Received upload file for chat with report: {}".format(file.filename))
-
-    document_service = DocumentService()
-    vector_service = VectorService()
-    chat_service = ChatService(vector_service)
-
+    # save_uploaded_files(uploaded_files=file, target_dir=UPLOAD_BASE, )
     MAX_FILE_SIZE = 1024 * 1024 * 200
     # get file type
     file_type, mime_type= get_file_type(file.filename)
@@ -140,7 +159,7 @@ async def upload_document(file: UploadFile = File(...)) -> Any:
 
         logger.info(f"Successfully processed document: {file.filename} with ID: {document_id}")
 
-        return JSONResponse({
+        response = JSONResponse({
             "success": True,
             "document_id": document_id,
             "summary": summary_text,
@@ -153,6 +172,20 @@ async def upload_document(file: UploadFile = File(...)) -> Any:
                 "image_count": metadata.get("extracted_images", 0)
             }
         })
+        # set session cookie if not exists
+        session_id = create_session_if_not_exists(request, response)
+
+        # store processed doc for this session
+        user_doc_key = f"{session_id}_{document_id}"
+        processed_documents[user_doc_key] = {
+            "summary": summary_text,
+            "metadata": doc_info,
+            "chat_history": []
+        }
+
+        logger.info(f"Stored document {document_id} for session {session_id}")
+        return response
+
     except HTTPException as e:
         raise e
     except Exception as e:
@@ -205,5 +238,44 @@ def generate_highlights(filename: str, metadata: dict, doc_info: dict) -> list:
 
     return highlights
 
+@app.post('/document-analysis/chat')
+async def chat_with_document(
+        request: Request,
+        document_id: str = Form(...),
+        message: str = Form(...),
+        chat_history: Optional[str] = Form(default='[]')
+):
+    try:
+        session_id = request.cookies.get("session_id")
+        if not session_id:
+            raise HTTPException(status_code=401, detail="Authentication required (no session)")
+        user_doc_key = f"testing_document_{document_id}"
+        if user_doc_key not in processed_documents:
+            raise HTTPException(status_code=404, detail="Document not found for this session")
+            # parse chat history
+        try:
+            history = json.loads(chat_history) if chat_history else []
+        except json.JSONDecodeError:
+            history = []
+
+        response_text = chat_service.chat_with_document(user_doc_key, message)
+
+        # update session’s stored history
+        history.append({"role": "user", "content": message})
+        history.append({"role": "assistant", "content": response_text})
+        processed_documents[user_doc_key]["chat_history"] = history
+
+        return JSONResponse({
+            "success": True,
+            "response": response_text,
+            "chat_history": history,
+            "document_id": document_id
+        })
 
 
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error in chat for document {document_id}: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Error processing chat: {str(e)}")
