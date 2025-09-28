@@ -310,12 +310,27 @@ body {
 }
 
 .document-summary {
-    background: rgba(0, 255, 150, 0.05);
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 20px;
-    border-left: 4px solid #00ff96;
+  max-height: 300px;   /* adjust based on your UI */
+  overflow-y: auto;    /* independent scroll */
+  margin-top: 10px;
+  padding: 12px;
+  background: #111;    /* keep dark theme */
+  border-radius: 10px;
+  color: #e0e0e0;
 }
+
+/* optional scrollbar styling */
+.document-summary::-webkit-scrollbar {
+  width: 6px;
+}
+.document-summary::-webkit-scrollbar-thumb {
+  background: #00ff99;
+  border-radius: 4px;
+}
+.document-summary::-webkit-scrollbar-track {
+  background: #222;
+}
+
 
 .summary-title {
     font-weight: 700;

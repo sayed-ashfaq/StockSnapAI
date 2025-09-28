@@ -66,43 +66,46 @@
                 </div>
 
                 <!-- Right Panel - Chat Interface -->
-                <div class="right-panel">
-                    <div class="chat-container">
-                        <div class="chat-header">
-                            <div class="section-header">💬 Chat with Document</div>
+                    <div class="right-panel">
+                        <div class="chat-container">
+                            <div class="chat-header">
+                                <div class="section-header">💬 Chat with Document</div>
 
-                            <div class="document-summary" id="documentSummary" style="display: none;">
-                                <div class="summary-title">📊 Document Summary</div>
-                                <div class="summary-content" id="summaryText">
-                                    <!-- Summary will be populated here -->
-                                </div>
-                                <div class="key-highlights">
-                                    <strong>Key Financial Highlights:</strong>
-                                    <ul class="highlights-list" id="highlightsList">
-                                        <!-- Highlights will be populated here -->
-                                    </ul>
+                                <!-- ✅ Independent scroll summary -->
+                                <div class="document-summary" id="documentSummary" style="display: none;">
+                                    <div class="summary-title">📊 Document Summary</div>
+                                    <div class="summary-content" id="summaryText">
+                                        <!-- Summary will be populated here -->
+                                    </div>
+                                    <div class="key-highlights">
+                                        <strong>Key Financial Highlights:</strong>
+                                        <ul class="highlights-list" id="highlightsList">
+                                            <!-- Highlights will be populated here -->
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="chat-messages" id="chatMessages">
-                            <div class="empty-chat" id="emptyChat">
-                                <div class="empty-chat-icon">💬</div>
-                                <h3>Ready to Chat</h3>
-                                <p>Upload a financial document to start chatting with AI. Get summaries, ask questions, and detect red flags.</p>
+                            <!-- ✅ Chat messages stays below -->
+                            <div class="chat-messages" id="chatMessages">
+                                <div class="empty-chat" id="emptyChat">
+                                    <div class="empty-chat-icon">💬</div>
+                                    <h3>Ready to Chat</h3>
+                                    <p>Upload a financial document to start chatting with AI. Get summaries, ask questions, and detect red flags.</p>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="chat-input-container">
-                            <div class="chat-input-wrapper">
-                                <textarea class="chat-input" id="chatInput"
-                                          placeholder="Ask a question about the document..."
-                                          rows="1" disabled></textarea>
-                                <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>Send</button>
+                            <div class="chat-input-container">
+                                <div class="chat-input-wrapper">
+                                    <textarea class="chat-input" id="chatInput"
+                                              placeholder="Ask a question about the document..."
+                                              rows="1" disabled></textarea>
+                                    <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>Send</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+
             </div>
         </div>
 
