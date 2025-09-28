@@ -377,7 +377,7 @@ async function sendMessage() {
         formData.append('message', message);
         formData.append('chat_history', JSON.stringify(chatHistory));
 
-        const response = await fetch(`${API_BASE_URL}/chat`, {
+        const response = await fetch(`/document-analysis/chat`, {
             method: 'POST',
             body: formData,
             credentials: 'include'
