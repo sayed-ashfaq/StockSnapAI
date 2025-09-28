@@ -458,6 +458,7 @@ async def chat_with_document(
         # Update chat history
         history.append({"role": "user", "content": message})
         history.append({"role": "assistant", "content": response})
+        processed_documents[user_doc_key]["chat_history"] = history
 
         return JSONResponse({
             "success": True,
